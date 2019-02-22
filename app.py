@@ -77,7 +77,7 @@ def pokiki():
 	pokiki_program_root = Path(".\programs\Pokiki")
 	print("Pokiki root:", pokiki_program_root.resolve())
 
-	if request.files['image']:
+	if "image" in request.files:
 		f = request.files['image']
 	else:
 		return "No image provided"
