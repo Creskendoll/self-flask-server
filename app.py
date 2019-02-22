@@ -2,12 +2,15 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file, abort
 # from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
+from werkzeug.utils import secure_filename
 from forms import *
 import os
+from pathlib import Path
+import subprocess
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -46,7 +49,6 @@ def home():
     # return render_template('pages/placeholder.home.html')
     return app.send_static_file("index.html")
 
-
 # @app.route('/about')
 # def about():
 #     return render_template('pages/placeholder.about.html')
@@ -69,13 +71,27 @@ def home():
 #     form = ForgotForm(request.form)
 #     return render_template('forms/forgot.html', form=form)
 
-@app.route('/pokiki')
+@app.route('/pokiki', methods=['POST'])
 def pokiki():
-    
-	return "ok"
+	pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
+	f = request.files['image']
+	out_folder = pokiki_program_root / "./in/web/"
+	file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
+	
+	# logging.log("Saving file:", file_path)
+	f.save(file_path)
+	
+	pokiki_program = pokiki_program_root / "Program.py"
+
+	result_file = Path("./temp/out.jpg")
+	subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+
+	if os.path.isfile(result_file):
+		return send_file(str(result_file.resolve()), mimetype='image/jpg')
+	else:
+		return abort(400) 
 
 # Error handlers.
-
 
 @app.errorhandler(500)
 def internal_error(error):
@@ -110,4 +126,3 @@ if not app.debug:
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
