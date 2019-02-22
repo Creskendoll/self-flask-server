@@ -94,7 +94,7 @@ def pokiki():
 
 		pokiki_program = pokiki_program_root / "Program.py"
 
-		result_file = Path("./temp/out.jpg")
+		result_file = Path("./temp/") / f.filename
 		subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
 
 		if os.path.isfile(result_file):
