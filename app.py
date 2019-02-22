@@ -77,29 +77,32 @@ def pokiki():
 	pokiki_program_root = Path("programs/Pokiki")
 	print("Pokiki root:", pokiki_program_root.resolve())
 
+	f = None
 	if "image" in request.files:
 		f = request.files['image']
 	else:
 		return "No image provided"
 
-	out_folder = pokiki_program_root / "./in/"
-	print("received img name", f.filename)
-	file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
-	print("save file path", file_path)
+	if f is not None:
+		out_folder = pokiki_program_root / "./in/"
+		print("received img name", f.filename)
+		file_path = os.path.join(out_folder, secure_filename(f.filename))
+		# print("save file path:", file_path)
 
-	logging.log("Saving file:", file_path)
-	f.save(file_path)
-	
-	pokiki_program = pokiki_program_root / "Program.py"
+		f.save(file_path)
+		print("Saved to:", file_path)
 
-	result_file = Path("./temp/out.jpg")
-	subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+		pokiki_program = pokiki_program_root / "Program.py"
 
-	if os.path.isfile(result_file):
-		return send_file(str(result_file.resolve()), mimetype='image/jpg')
+		result_file = Path("./temp/out.jpg")
+		subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+
+		if os.path.isfile(result_file):
+			return send_file(str(result_file.resolve()), mimetype='image/jpg')
+		else:
+			return abort(400) 
 	else:
-		return abort(400) 
-
+		return "can't process image"
 # Error handlers.
 
 @app.errorhandler(500)
