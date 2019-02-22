@@ -73,12 +73,17 @@ def home():
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
-	pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
+	# pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
+	pokiki_program_root = Path(".\programs\Pokiki")
+	print("Pokiki root:", pokiki_program_root.resolve())
+
 	f = request.files['image']
-	out_folder = pokiki_program_root / "./in/web/"
+	out_folder = pokiki_program_root / "./in/"
+	print("received img name", f.filename)
 	file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
-	
-	# logging.log("Saving file:", file_path)
+	print("save file path", file_path)
+
+	logging.log("Saving file:", file_path)
 	f.save(file_path)
 	
 	pokiki_program = pokiki_program_root / "Program.py"

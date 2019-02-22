@@ -11,12 +11,12 @@ from functools import partial
 import sys, getopt
 import os 
 
-rootFolder = Path('E:\CODE\self-flask-server\programs\Pokiki')
-# print("Program root folder", rootFolder)
+rootFolder = Path('./programs/Pokiki')
+print("Program root folder", rootFolder.resolve())
 tilesFolder = rootFolder / "tiles/"
 # print("Tiles", tilesFolder.resolve())
 
-data = rootFolder / './out/data.json'
+data = rootFolder / 'out/data.json'
 helperOBJ = Helper.HelperOBJ(data.resolve())
 
 def buildRows(splitByHorizontal, splitByVertical, quality, picture_section):
@@ -93,7 +93,7 @@ def main(argv):
         print ('test.py -i <inputfile> -o <outputfile> -x <horizontalDivide> -y <verticalDivide> -q <quality>')
         sys.exit()
 
-    input_picture = Image.open((rootFolder / inputfile).resolve())
+    input_picture = Image.open(inputfile)
 
     startTime = time.time()
     time.clock()    
@@ -133,9 +133,9 @@ def main(argv):
 
     elapsed = time.time() - startTime
     print('Total elapsed time:', elapsed)
-    out_img = rootFolder / outputfile
-    print("Saving result image to:", out_img.resolve())
-    cv2.imwrite(str(out_img.resolve()), resultIMG)
+    # out_img = rootFolder / outputfile
+    print("Saving result image to:", outputfile)
+    cv2.imwrite(outputfile, resultIMG)
 
 if __name__=='__main__':
     main(sys.argv[1:])
