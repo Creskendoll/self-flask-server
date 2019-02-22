@@ -6,6 +6,8 @@ coverage
 numpy
 Pillow
 opencv-python
+Flask
+scipy
 # ecdsa
 # paramiko
 # pycrypto

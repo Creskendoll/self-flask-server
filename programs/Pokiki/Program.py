@@ -1,7 +1,5 @@
-#!/usr/bin/python3
-
-import Helper
 import cv2
+import Helper
 import numpy as np
 from pathlib import Path
 from PIL import Image
