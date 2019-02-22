@@ -78,6 +78,8 @@ def pokiki():
 	print("Pokiki root:", pokiki_program_root.resolve())
 
 	f = request.files['image']
+	if f is None:
+		return "No file provided"
 	out_folder = pokiki_program_root / "./in/"
 	print("received img name", f.filename)
 	file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
