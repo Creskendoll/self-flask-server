@@ -84,9 +84,9 @@ def pokiki():
 		return "No image provided"
 
 	if f is not None:
-		out_folder = pokiki_program_root / "./in/"
+		out_folder = Path("./temp/serverCache/")
 		print("received img name", f.filename)
-		file_path = os.path.join(out_folder, secure_filename(f.filename))
+		file_path = os.path.join(out_folder.resolve(), secure_filename(f.filename))
 		# print("save file path:", file_path)
 
 		f.save(file_path)
@@ -94,7 +94,7 @@ def pokiki():
 
 		pokiki_program = pokiki_program_root / "Program.py"
 
-		result_file = Path("./temp/") / f.filename
+		result_file = Path("./temp/programOut/") / f.filename
 		subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
 
 		if os.path.isfile(result_file):
