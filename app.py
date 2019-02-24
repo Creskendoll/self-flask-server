@@ -73,24 +73,36 @@ def home():
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
-	pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
-	f = request.files['image']
-	out_folder = pokiki_program_root / "./in/web/"
-	file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
-	
-	# logging.log("Saving file:", file_path)
-	f.save(file_path)
-	
-	pokiki_program = pokiki_program_root / "Program.py"
+	# pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
+	pokiki_program_root = Path("programs/Pokiki")
+	print("Pokiki root:", pokiki_program_root.resolve())
 
-	result_file = Path("./temp/out.jpg")
-	subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
-
-	if os.path.isfile(result_file):
-		return send_file(str(result_file.resolve()), mimetype='image/jpg')
+	f = None
+	if "image" in request.files:
+		f = request.files['image']
 	else:
-		return abort(400) 
+		return "No image provided"
 
+	if f is not None:
+		out_folder = pokiki_program_root / "./in/"
+		print("received img name", f.filename)
+		file_path = os.path.join(out_folder, secure_filename(f.filename))
+		# print("save file path:", file_path)
+
+		f.save(file_path)
+		print("Saved to:", file_path)
+
+		pokiki_program = pokiki_program_root / "Program.py"
+
+		result_file = Path("./temp/") / f.filename
+		subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+
+		if os.path.isfile(result_file):
+			return send_file(str(result_file.resolve()), mimetype='image/jpg')
+		else:
+			return abort(400) 
+	else:
+		return "can't process image"
 # Error handlers.
 
 @app.errorhandler(500)
