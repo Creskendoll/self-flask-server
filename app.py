@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, send_file, abort
+from flask import Flask, render_template, request, send_file, abort, Blueprint
 # from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
@@ -12,12 +12,19 @@ import os
 from pathlib import Path
 import subprocess
 
+from flask_wtf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
 
 app = Flask(__name__)
 app.config.from_object('config')
+# csrf = CSRFProtect(app)
+# api_blueprint = Blueprint('api', __name__)
+# csrf.exempt(api_blueprint)
+# app.register_blueprint(api_blueprint)
+# api = restful.Api(app, decorators=[csrf_protect.exempt])
 #db = SQLAlchemy(app)
 
 # Automatically tear down SQLAlchemy.
@@ -73,37 +80,44 @@ def home():
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
-	# pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
-	pokiki_program_root = Path("programs/Pokiki")
-	print("Pokiki root:", pokiki_program_root.resolve())
+    # pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
+    pokiki_program_root = Path("programs/Pokiki")
+    print("Pokiki root:", pokiki_program_root.resolve())
 
-	f = None
-	if "image" in request.files:
-		f = request.files['image']
-	else:
-		return "No image provided"
+    f = None
+    if "image" in request.files:
+        f = request.files['image']
+    else:
+        return "No image provided"
 
-	if f is not None:
-		out_folder = Path("./temp/serverCache/")
-		print("received img name", f.filename)
-		file_path = os.path.join(out_folder.resolve(), secure_filename(f.filename))
-		# print("save file path:", file_path)
+    if f is not None:
+        out_folder = Path("./temp/serverCache/")
+        print("received img name", f.filename)
+        file_path = os.path.join(out_folder.resolve(), secure_filename(f.filename))
+        # print("save file path:", file_path)
 
-		f.save(file_path)
-		print("Saved to:", file_path)
+        f.save(file_path)
+        print("Saved to:", file_path)
 
-		pokiki_program = pokiki_program_root / "Program.py"
+        pokiki_program = pokiki_program_root / "Program.py"
 
-		result_file = Path("./temp/programOut/") / f.filename
-		subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+        result_file = Path("./temp/programOut/") / f.filename
+        if not os.path.isfile(file_path):
+            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+        else:
+            print("File already exists in server. Skipping program executiion.")
+        
+        if os.path.isfile(result_file):
+            return str(result_file.resolve())
+        else:
+            return abort(400)
+    else:
+        return "can't process image"
 
-		if os.path.isfile(result_file):
-			return send_file(str(result_file.resolve()), mimetype='image/jpg')
-		else:
-			return abort(400) 
-	else:
-		return "can't process image"
 # Error handlers.
+@app.route('/pokiki', methods=["GET"])
+def pokikiGET():
+    return send_file(request.args.get("image"), mimetype="image/jpg")
 
 @app.errorhandler(500)
 def internal_error(error):
