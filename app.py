@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, send_file, abort, Blueprint
+from flask import Flask, render_template, request, send_file, abort, session, make_response
 # from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
@@ -11,6 +11,8 @@ from forms import *
 import os
 from pathlib import Path
 import subprocess
+import string
+import random
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -20,11 +22,7 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 app.config.from_object('config')
-# csrf = CSRFProtect(app)
-# api_blueprint = Blueprint('api', __name__)
-# csrf.exempt(api_blueprint)
-# app.register_blueprint(api_blueprint)
-# api = restful.Api(app, decorators=[csrf_protect.exempt])
+csrf = CSRFProtect(app)
 #db = SQLAlchemy(app)
 
 # Automatically tear down SQLAlchemy.
@@ -54,7 +52,7 @@ def login_required(test):
 @app.route('/')
 def home():
     # return render_template('pages/placeholder.home.html')
-    return app.send_static_file("index.html")
+    return session.send_static_file("index.html")
 
 # @app.route('/about')
 # def about():
@@ -78,8 +76,41 @@ def home():
 #     form = ForgotForm(request.form)
 #     return render_template('forms/forgot.html', form=form)
 
+@app.before_request
+def csrf_protect():
+    if request.method == "POST":
+        token = session.pop('_csrf_token', None)
+        print("Before req CSRF:", request.form.get('_csrf_token'))
+        if not token or token != request.form.get('_csrf_token'):
+            abort(403)
+
+def randomString(N):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=N))
+
+def generate_csrf_token():
+    if '_csrf_token' not in session:
+        session['_csrf_token'] = randomString(10)
+    return session['_csrf_token']
+
+# app.jinja_env.globals['csrf_token'] = generate_csrf_token
+
+@app.route("/authCSRF", methods=['GET'])
+def authCSRF():
+    token = generate_csrf_token()
+    res = make_response("Cookie")
+    res.set_cookie("_csrf_token", value=token, max_age=None)
+    session['_csrf_token'] = token 
+    return res
+
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
+
+    if request.method == "POST":
+        token = session.pop('_csrf_token', None)
+        print("Before req CSRF:", request.form.get('_csrf_token'))
+        if not token or token != request.form.get('_csrf_token'):
+            abort(403)
+
     pokiki_program_root = Path("programs/Pokiki")
     print("Pokiki root:", pokiki_program_root.resolve())
 
@@ -116,7 +147,7 @@ def pokiki():
 # Error handlers.
 @app.route('/pokiki', methods=["GET"])
 def pokikiGET():
-    return app.send_static_file(request.args.get("image"))
+    return session.send_static_file(request.args.get("image"))
 
 @app.errorhandler(500)
 def internal_error(error):
@@ -126,7 +157,7 @@ def internal_error(error):
 
 @app.errorhandler(404)
 def not_found_error(error):
-    return app.send_static_file("404.html"), 404
+    return session.send_static_file("404.html"), 404
 
 if not app.debug:
     file_handler = FileHandler('error.log')
