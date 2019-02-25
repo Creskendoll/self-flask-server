@@ -80,7 +80,6 @@ def home():
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
-    # pokiki_program_root = Path("E:\CODE\self-flask-server\programs\Pokiki")
     pokiki_program_root = Path("programs/Pokiki")
     print("Pokiki root:", pokiki_program_root.resolve())
 
