@@ -93,30 +93,30 @@ def pokiki():
         out_folder = Path("./temp/serverCache/")
         print("received img name", f.filename)
         file_path = os.path.join(out_folder.resolve(), secure_filename(f.filename))
-        # print("save file path:", file_path)
 
         f.save(file_path)
         print("Saved to:", file_path)
 
         pokiki_program = pokiki_program_root / "Program.py"
 
-        result_file = Path("./temp/programOut/") / f.filename
-        if not os.path.isfile(file_path):
+        result_file = Path("./static/programFiles/") / f.filename
+        if not os.path.isfile(result_file):
             subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
         else:
             print("File already exists in server. Skipping program executiion.")
         
         if os.path.isfile(result_file):
-            return str(result_file.resolve())
+            img_path = "programFiles/" + f.filename
+            return str(img_path)
         else:
-            return abort(400)
+            return abort(500)
     else:
         return "can't process image"
 
 # Error handlers.
 @app.route('/pokiki', methods=["GET"])
 def pokikiGET():
-    return send_file(request.args.get("image"), mimetype="image/jpg")
+    return app.send_static_file(request.args.get("image"))
 
 @app.errorhandler(500)
 def internal_error(error):
