@@ -91,7 +91,7 @@ def pokiki():
 
     if f is not None:
         out_folder = Path("./temp/serverCache/")
-        print("received img name", f.filename)
+        print("received IMG:", f.filename)
         file_path = os.path.join(out_folder.resolve(), secure_filename(f.filename))
 
         f.save(file_path)
