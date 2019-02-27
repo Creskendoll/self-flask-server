@@ -80,7 +80,7 @@ def pokiki():
 
         print("Result file:", result_file)
         if not os.path.isfile(result_file):
-            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
+            subprocess.run(["python3", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
         else:
             print("File already exists in server. Skipping program executiion.")
         

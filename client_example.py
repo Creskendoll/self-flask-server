@@ -5,7 +5,7 @@ out_file = "./temp/client.jpg"
 local = "http://localhost:5000/pokiki"
 public = "http://www.kenansoylu.com/pokiki"
 gcloud = "https://titanium-acumen-232511.appspot.com/pokiki"
-gcloud = "http://35.198.148.117/pokiki"
+gcloud = "http://35.198.148.117:5000/pokiki"
 
 with open('./static/images/about/02.jpg', 'rb') as f:
     r = requests.post(gcloud, files={'image': f}, stream=True)
