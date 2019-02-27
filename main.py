@@ -99,13 +99,15 @@ def pokiki():
 
         pokiki_program = pokiki_program_root / "Program.py"
 
-        result_file = Path("./static/programFiles/") / secure_filename(f.filename)
-        if not os.path.isfile(str(result_file.resolve())):
-            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", str(result_file.resolve())])
+        result_file = os.path.join(str(Path("./static/programFiles/").resolve()), secure_filename(f.filename))
+
+        print("Result file:", result_file)
+        if not os.path.isfile(result_file):
+            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
         else:
             print("File already exists in server. Skipping program executiion.")
         
-        if os.path.isfile(str(result_file.resolve())):
+        if os.path.isfile(result_file):
             img_path = "programFiles/" + secure_filename(f.filename)
             return str(img_path)
         else:
