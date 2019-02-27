@@ -15,7 +15,7 @@ tilesFolder = rootFolder / "tiles/"
 # print("Tiles", tilesFolder.resolve())
 
 data = rootFolder / 'out/data.json'
-helperOBJ = Helper.HelperOBJ(data.resolve())
+helperOBJ = Helper.HelperOBJ(str(data.resolve()))
 
 def buildRows(splitByHorizontal, splitByVertical, quality, picture_section):
     columns = None
