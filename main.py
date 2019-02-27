@@ -53,30 +53,7 @@ def login_required(test):
 
 @app.route('/')
 def home():
-    # return render_template('pages/placeholder.home.html')
     return app.send_static_file("index.html")
-
-# @app.route('/about')
-# def about():
-#     return render_template('pages/placeholder.about.html')
-
-
-# @app.route('/login')
-# def login():
-#     form = LoginForm(request.form)
-#     return render_template('forms/login.html', form=form)
-
-
-# @app.route('/register')
-# def register():
-#     form = RegisterForm(request.form)
-#     return render_template('forms/register.html', form=form)
-
-
-# @app.route('/forgot')
-# def forgot():
-#     form = ForgotForm(request.form)
-#     return render_template('forms/forgot.html', form=form)
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
@@ -123,7 +100,7 @@ def pokikiGET():
 @app.errorhandler(500)
 def internal_error(error):
     #db_session.rollback()
-    return render_template('errors/500.html'), 500
+    return render_template('404.html'), 500
 
 
 @app.errorhandler(404)
@@ -151,5 +128,5 @@ if not app.debug:
 # Or specify port manually:
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 80))
     app.run(host='0.0.0.0', port=port)
