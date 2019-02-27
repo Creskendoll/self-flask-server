@@ -97,12 +97,6 @@ def pokiki():
 def pokikiGET():
     return app.send_static_file(request.args.get("image"))
 
-@app.errorhandler(500)
-def internal_error(error):
-    #db_session.rollback()
-    return render_template('404.html'), 500
-
-
 @app.errorhandler(404)
 def not_found_error(error):
     return app.send_static_file("404.html"), 404
@@ -128,5 +122,5 @@ if not app.debug:
 # Or specify port manually:
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 80))
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
