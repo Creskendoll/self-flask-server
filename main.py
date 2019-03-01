@@ -7,7 +7,6 @@ from flask import Flask, render_template, request, send_file, abort, Blueprint
 import logging
 from logging import Formatter, FileHandler
 from werkzeug.utils import secure_filename
-from forms import *
 import os
 from pathlib import Path
 import subprocess
@@ -95,7 +94,10 @@ def pokiki():
 # Error handlers.
 @app.route('/pokiki', methods=["GET"])
 def pokikiGET():
-    return app.send_static_file(request.args.get("image"))
+    if request.args.get("image") is not None:
+        return app.send_static_file(request.args.get("image"))
+    else:
+        return app.send_static_file('pokiki.html')
 
 @app.errorhandler(404)
 def not_found_error(error):

@@ -7,7 +7,9 @@ public = "http://www.kenansoylu.com/pokiki"
 gcloud = "https://titanium-acumen-232511.appspot.com/pokiki"
 gcloud = "http://35.198.148.117:5000/pokiki"
 
-with open('./static/images/about/02.jpg', 'rb') as f:
+img = "D:\Code\BAU\IMG\pokiki\in\sevval.jpg"
+# './static/images/about/02.jpg'
+with open(img, 'rb') as f:
     r = requests.post(gcloud, files={'image': f}, stream=True)
     if r.status_code == 200:
         print("Request OK")
