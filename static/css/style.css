@@ -360,7 +360,8 @@ header{
     -moz-transition: background-image 1s ease-in-out;
     -o-transition: background-image 1s ease-in-out;
     transition: background-image 1s ease-in-out;
-    background-image: url(../images/background/0.jpg);
+    /* background-image: url(../images/background/0.jpg); */
+    background-image: url(static/images/fancybox/fancybox_loading@2x.gif);
 }
 .mainbanner_content{
   position: relative;
@@ -861,4 +862,11 @@ header{
   background: #232323;
   opacity: 0.2;
   width: 8%;
+}
+
+.carousel-img-container img {
+  background: url(../images/fancybox/fancybox_loading.gif) 50% no-repeat;
+}
+.carousel-img-container a {
+  background: url(../images/fancybox/fancybox_loading.gif) 50% no-repeat;
 }

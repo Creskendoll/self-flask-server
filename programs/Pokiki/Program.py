@@ -15,7 +15,7 @@ tilesFolder = rootFolder / "tiles/"
 # print("Tiles", tilesFolder.resolve())
 
 data = rootFolder / 'out/data.json'
-helperOBJ = Helper.HelperOBJ(data.resolve())
+helperOBJ = Helper.HelperOBJ(str(data.resolve()))
 
 def buildRows(splitByHorizontal, splitByVertical, quality, picture_section):
     columns = None
@@ -134,6 +134,9 @@ def main(argv):
     # out_img = rootFolder / outputfile
     print("Saving result image to:", outputfile)
     cv2.imwrite(outputfile, resultIMG)
+
+def processImage(self, img, args=None):
+    mainWithIMG(img, args)
 
 if __name__=='__main__':
     main(sys.argv[1:])

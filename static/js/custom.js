@@ -236,14 +236,24 @@
 //=====================================================================================
 //  11.   Backgroud crossfade
 //=====================================================================================
-const interval = 3000;
-var img_index = 1;
-function cycleImages() {
-  let img_name = "url('static/images/background/" + img_index.toString() + ".jpg')";
-  $('#main_banner').css('background-image', img_name)
-  img_index = (img_index + 1) % 4;
-};
-setInterval('cycleImages()', interval);
+function startCycle() {
+  const interval = 3000;
+  var img_index = 1;
+  function cycleImages() {
+    let img_name = "url('static/images/background/" + img_index.toString() + ".jpg')";
+    $('#main_banner').css('background-image', img_name)
+    img_index = (img_index + 1) % 4;
+  };
+  setInterval('cycleImages()', interval);
+}
+
+let downloadingImage = new Image();
+downloadingImage.onload = function () {
+  startCycle();
+  photo_item.find("a").attr("href", a_href);
+  photo_item.find("img").attr("src", img_name);
+}; 
+downloadingImage.src = img_name;
 
 //=====================================================================================
 //  11.   MAIL
@@ -272,17 +282,15 @@ $("#portfolio").on('swiperight', () => {
 });
 
 $("#carouselExampleControls").carousel({
-  interval : 4000
+  interval : 3000
 });
 const PHOTO_RANGE = 12;
 const PHOTO_COUNT_SECTION = 6;
 
 let caro_items = [];
 
-$(".carousel-img-container").each(function (carousel_item_index, carousel_item) {
-  let photo_items = [];
-
-  Array(PHOTO_COUNT_SECTION).fill().map((_, i) => {
+$(".carousel-img-container").each(function (carousel_item_index, _) {
+  let photo_items = Array(PHOTO_COUNT_SECTION).fill().map((_, i) => {
     let img_index = ((carousel_item_index*PHOTO_COUNT_SECTION) + i);
     if (img_index < PHOTO_RANGE) {
       let img_name = "static/images/portfolio/gallery/"+ img_index.toString()+".jpg";
@@ -290,9 +298,13 @@ $(".carousel-img-container").each(function (carousel_item_index, carousel_item) 
       
       let photo_item = $(".photo-item").clone();
       photo_item.attr("hidden", false);
-      photo_item.find("a").attr("href", a_href);
-      photo_item.find("img").attr("src", img_name);
-      photo_items.push(photo_item);
+      let downloadingImage = new Image();
+      downloadingImage.onload = function () {
+        photo_item.find("a").attr("href", a_href);
+        photo_item.find("img").attr("src", img_name);
+      }; 
+      downloadingImage.src = img_name;
+      return photo_item;
     }
   });
     caro_items.push(photo_items);
