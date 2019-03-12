@@ -48,6 +48,9 @@
       alert('Please allow popups for this website.');
     }
   });
+  $('body').click(() => {
+    $('.navbar-collapse').collapse('hide');
+  });
 
   /*=========================================================================== 
     // 01.   Typed Text
@@ -236,24 +239,44 @@
 //=====================================================================================
 //  11.   Backgroud crossfade
 //=====================================================================================
+var img_index = 1;
+const N = 4;
+const interval = 3000;
+
+function cycleImages() {
+  let img_name = "url('static/images/background/" + img_index.toString() + ".jpg')";
+  $('#main_banner').css('background-image', img_name)
+  $('#main_banner').css({
+    "background-size": "cover",
+    "position": "relative"
+  });
+  
+  if(img_index == 2) {
+    $("#main_banner").css({
+      "-webkit-transition": "background-image 1s ease-in-out",
+      "-moz-transition": "background-image 1s ease-in-out",
+      "-o-transition": "background-image 1s ease-in-out",
+      "transition": "background-image 1s ease-in-out",
+    });
+  }
+  img_index = (img_index + 1) % N;
+};
 function startCycle() {
-  const interval = 3000;
-  var img_index = 1;
-  function cycleImages() {
-    let img_name = "url('static/images/background/" + img_index.toString() + ".jpg')";
-    $('#main_banner').css('background-image', img_name)
-    img_index = (img_index + 1) % 4;
-  };
   setInterval('cycleImages()', interval);
 }
+let loaded_count = 0;
+Array.apply(null, {length: N}).map(Number.call, Number).forEach(i => {
+  let img_path = 'static/images/background/' + i.toString() + '.jpg';
+  let downloadingImage = new Image();
+  downloadingImage.onload = function () {
+    loaded_count++;
+    if (loaded_count == N) {
+      startCycle();
+    }
+  };
+  downloadingImage.src = img_path;
+});
 
-let downloadingImage = new Image();
-downloadingImage.onload = function () {
-  startCycle();
-  photo_item.find("a").attr("href", a_href);
-  photo_item.find("img").attr("src", img_name);
-}; 
-downloadingImage.src = img_name;
 
 //=====================================================================================
 //  11.   MAIL
@@ -274,17 +297,11 @@ $('.carousel-control-prev').click(() => {
 $('.carousel-control-next').click(() => {
   $("#carouselExampleControls").carousel('next');
 });
-$("#portfolio").on('swipeleft', () => {
-  $("#carouselExampleControls").carousel('prev');
-});
-$("#portfolio").on('swiperight', () => {
-  $("#carouselExampleControls").carousel('next');
-});
 
 $("#carouselExampleControls").carousel({
   interval : 3000
 });
-const PHOTO_RANGE = 12;
+const PHOTO_RANGE = 24;
 const PHOTO_COUNT_SECTION = 6;
 
 let caro_items = [];
@@ -300,16 +317,20 @@ $(".carousel-img-container").each(function (carousel_item_index, _) {
       photo_item.attr("hidden", false);
       let downloadingImage = new Image();
       downloadingImage.onload = function () {
+        $(".photo-item").eq(0).find("a").attr("data-fancybox", "");
         photo_item.find("a").attr("href", a_href);
         photo_item.find("img").attr("src", img_name);
-      }; 
+      };
       downloadingImage.src = img_name;
       return photo_item;
     }
   });
+  // $(".carousel-img-container").eq(carousel_item_index).append(photo_items);  
     caro_items.push(photo_items);
 });
 
 $(".carousel-img-container").eq(0).append(caro_items[0]);
 $(".carousel-img-container").eq(1).append(caro_items[1]);
 $(".carousel-img-container").eq(2).append(caro_items[2]);
+$(".carousel-img-container").eq(3).append(caro_items[3]);
+$(".carousel-img-container").eq(4).append(caro_items[4]);
