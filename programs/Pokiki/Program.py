@@ -22,7 +22,7 @@ def buildRows(splitByHorizontal, splitByVertical, quality, picture_section):
     columnCount = 0
     for count, img in enumerate(Helper.splitRow(picture_section, splitByHorizontal, splitByVertical)):
         open_cv_IMG = np.array(img, dtype='uint8')
-        open_cv_IMG = cv2.cvtColor(open_cv_IMG, cv2.COLOR_RGBA2BGRA)
+        # open_cv_IMG = cv2.cvtColor(open_cv_IMG, cv2.COLOR_RGBA2BGRA)
         # open_cv_IMG = increase_brightness(open_cv_IMG, value=20)
 
         # tile_color = Helper.getDominantColor(open_cv_IMG) 
