@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, send_file, abort, Blueprint
+from flask import Flask, request, send_file, abort, Response
 # from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
@@ -11,6 +11,8 @@ import os
 from pathlib import Path
 import subprocess
 import io
+import requests
+import ast
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -55,6 +57,31 @@ def login_required(test):
 def home():
     return app.send_static_file("index.html")
 
+@app.route('/vm/pokiki', methods=['POST', 'GET'])
+def _proxy():
+    print("HOST:", request.host_url)
+    print("Request URL:", request.url)
+    # url = "http://192.168.0.159:5000/pokiki"
+    url = "http://35.204.195.146:5000/pokiki"
+
+    redirect_url = request.url.replace(request.host_url+"vm/pokiki", url)
+    print("Redirect URL:", redirect_url)
+
+    resp = requests.request(
+        method=request.method,
+        url=redirect_url,
+        headers={key: value for (key, value) in request.headers if key != 'Host'},
+        data=request.get_data(),
+        cookies=request.cookies,
+        allow_redirects=False)
+
+    excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+    headers = [(name, value) for (name, value) in resp.raw.headers.items()
+               if name.lower() not in excluded_headers]
+
+    response = Response(resp.content, resp.status_code, headers)
+    return response
+
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
     pokiki_program_root = Path("programs/Pokiki")
@@ -65,6 +92,20 @@ def pokiki():
         f = request.files['image']
     else:
         return abort(400, "No image provided")
+
+    options = None
+    if "options" in request.form:
+        options = request.form["options"]
+    else:
+        options = {
+            "x" : "150",
+            "y" : "100",
+            "q" : "4"
+        }
+
+    if type(options) is str:
+        options = ast.literal_eval(options)
+    print(type(options))
 
     if f is not None:
         out_folder = Path("./temp/serverCache/")
@@ -81,9 +122,15 @@ def pokiki():
 
         result_file = os.path.join(str(Path("./static/programFiles/").resolve()), secure_filename(f.filename))
 
-        print("Result file:", result_file)
         if not os.path.isfile(result_file):
-            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
+            print("Starting program.")
+            try:
+                subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file, 
+                                "-x", options["x"], "-y", options["y"], "-q", options["q"]])
+                # subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
+            except Exception:
+                return abort(500, "Subprocess failed")
+            print("Result file:", result_file)
         else:
             print("File already exists in server. Skipping program executiion.")
         
@@ -91,9 +138,9 @@ def pokiki():
             img_path = "programFiles/" + secure_filename(f.filename)
             return str(img_path)
         else:
-            return abort(500)
+            return abort(500, "File couldn't be found")
     else:
-        return "can't process image"
+        return abort(400, "Error getting file")
 
 # Error handlers.
 @app.route('/pokiki', methods=["GET"])
