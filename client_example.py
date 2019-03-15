@@ -14,7 +14,7 @@ with open(img, 'rb') as f:
         print("Request OK")
         print("Image file path:", r.text)
         get_url = local + "?image=" + r.text # pass file location in URL args
-        print("Get URL:", get_url)
+        print("Get  URL:", get_url)
         img = requests.get(get_url)
         
         with open(out_file, 'wb') as res_file:
