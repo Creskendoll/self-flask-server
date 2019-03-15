@@ -10,6 +10,7 @@ from werkzeug.utils import secure_filename
 import os
 from pathlib import Path
 import subprocess
+import io
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -57,20 +58,23 @@ def home():
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
     pokiki_program_root = Path("programs/Pokiki")
-    print("Pokiki root:", pokiki_program_root.resolve())
+    # print("Pokiki root:", pokiki_program_root.resolve())
 
     f = None
     if "image" in request.files:
         f = request.files['image']
     else:
-        return "No image provided"
+        return abort(400, "No image provided")
 
     if f is not None:
         out_folder = Path("./temp/serverCache/")
         print("received IMG:", f.filename)
         file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
 
-        f.save(file_path)
+        # Save file 
+        in_memory_file = io.BytesIO(f.read())
+        with open(file_path,'wb') as out: ## Open temporary file as bytes
+            out.write(in_memory_file.read())                ## Read bytes into file
         print("Saved to:", file_path)
 
         pokiki_program = pokiki_program_root / "Program.py"
@@ -79,7 +83,7 @@ def pokiki():
 
         print("Result file:", result_file)
         if not os.path.isfile(result_file):
-            subprocess.run(["python3", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
+            subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
         else:
             print("File already exists in server. Skipping program executiion.")
         
