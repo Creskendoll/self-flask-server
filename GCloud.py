@@ -5,6 +5,15 @@ from google.appengine.api import app_identity
 class GCloud(object):
     def __init__(self):
         self.tmp_filenames_to_clean_up = []
+    
+    def get(self):
+        bucket_name = os.environ.get('BUCKET_NAME',
+                                    app_identity.get_default_gcs_bucket_name())
+
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write('Demo GCS Application running from Version: '
+                            + os.environ['CURRENT_VERSION_ID'] + '\n')
+        self.response.write('Using bucket name: ' + bucket_name + '\n\n')
 
     def getDefaultStorageBucket(self):
         bucket_name = os.environ.get('BUCKET_NAME', app_identity.get_default_gcs_bucket_name())
@@ -12,14 +21,6 @@ class GCloud(object):
         return bucket_name
 
     def writeFile(self, fileContent, fileName, fileType='image/jpg'):
-        """Create a file.
-
-        The retry_params specified in the open call will override the default
-        retry params for this particular file handle.
-
-        Args:
-            filename: filename.
-        """
         write_retry_params = gcs.RetryParams(backoff_factor=1.1)
         gcs_file = gcs.open(fileName,
                             'w',
@@ -44,3 +45,4 @@ class GCloud(object):
                 gcs.delete(filename)
             except gcs.NotFoundError:
                 pass
+    
