@@ -13,6 +13,7 @@ import subprocess
 import io
 import requests
 import ast
+import copy
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -59,12 +60,16 @@ def home():
 
 @app.route('/vm/pokiki', methods=['POST', 'GET'])
 def _proxy():
-    print("HOST:", request.host_url)
-    print("Request URL:", request.url)
-    # url = "http://192.168.0.159:5000/pokiki"
-    url = "http://35.204.195.146:5000/pokiki"
+    #print("HOST:", request.host_url)
+    #print("Request URL:", request.url)
+    vm_URL = "http://35.204.79.178:5000/pokiki"
+    vm_URL = "http://localhost:5000/pokiki"
 
-    redirect_url = request.url.replace(request.host_url+"vm/pokiki", url)
+    # if "options" in copy.deepcopy(request.form):
+    #     options = copy.deepcopy(request.form)["options"]
+    #     vm_URL = ast.literal_eval(copy.deepcopy(options))["Redirect_URL"]
+        
+    redirect_url = request.url.replace(request.host_url+"vm/pokiki", vm_URL)
     print("Redirect URL:", redirect_url)
 
     resp = requests.request(
@@ -85,27 +90,27 @@ def _proxy():
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
     pokiki_program_root = Path("programs/Pokiki")
-    # print("Pokiki root:", pokiki_program_root.resolve())
-
+    #print("Pokiki root:", pokiki_program_root.resolve())
+    
     f = None
     if "image" in request.files:
         f = request.files['image']
     else:
         return abort(400, "No image provided")
-
+        
     options = None
     if "options" in request.form:
         options = request.form["options"]
     else:
         options = {
-            "x" : "150",
-            "y" : "100",
-            "q" : "4"
+            "X" : "150",
+            "Y" : "100",
+            "Q" : "4",
+            "GetExisting" : "False"
         }
 
     if type(options) is str:
         options = ast.literal_eval(options)
-    print(type(options))
 
     if f is not None:
         out_folder = Path("./temp/serverCache/")
@@ -122,17 +127,16 @@ def pokiki():
 
         result_file = os.path.join(str(Path("./static/programFiles/").resolve()), secure_filename(f.filename))
 
-        if not os.path.isfile(result_file):
+        if options["GetExisting"]=="True" and os.path.isfile(result_file):
+            print("File already exists in server. Skipping program executiion.")
+        else:
             print("Starting program.")
             try:
                 subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file, 
-                                "-x", options["x"], "-y", options["y"], "-q", options["q"]])
-                # subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file])
+                                "-x", options["X"], "-y", options["Y"], "-q", options["Q"]])
             except Exception:
                 return abort(500, "Subprocess failed")
             print("Result file:", result_file)
-        else:
-            print("File already exists in server. Skipping program executiion.")
         
         if os.path.isfile(result_file):
             img_path = "programFiles/" + secure_filename(f.filename)

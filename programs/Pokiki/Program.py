@@ -10,7 +10,7 @@ import sys, getopt
 import os 
 
 rootFolder = Path('./programs/Pokiki')
-print("Program root folder", rootFolder.resolve())
+# print("Program root folder", rootFolder.resolve())
 tilesFolder = rootFolder / "tiles/"
 # print("Tiles", tilesFolder.resolve())
 
