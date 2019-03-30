@@ -63,7 +63,7 @@ def _proxy():
     #print("HOST:", request.host_url)
     #print("Request URL:", request.url)
     vm_URL = "http://35.204.79.178:5000/pokiki"
-    vm_URL = "http://localhost:5000/pokiki"
+    #vm_URL = "http://localhost:5000/pokiki"
 
     # if "options" in copy.deepcopy(request.form):
     #     options = copy.deepcopy(request.form)["options"]
