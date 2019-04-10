@@ -115,6 +115,9 @@ def pokiki():
     if f is not None:
         out_folder = Path("./temp/serverCache/")
         print("received IMG:", f.filename)
+        if not os.path.isdir(out_folder):
+            print("Creating folder:", out_folder)
+            os.mkdir(out_folder)
         file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
 
         # Save file 
@@ -125,7 +128,7 @@ def pokiki():
 
         pokiki_program = pokiki_program_root / "Program.py"
 
-        result_file = os.path.join(str(Path("./static/programFiles/").resolve()), secure_filename(f.filename))
+        result_file = os.path.join(str(Path("./static/pokiki_images/").resolve()), secure_filename(f.filename))
 
         if options["GetExisting"]=="True" and os.path.isfile(result_file):
             print("File already exists in server. Skipping program executiion.")
@@ -139,18 +142,19 @@ def pokiki():
             print("Result file:", result_file)
         
         if os.path.isfile(result_file):
-            img_path = "programFiles/" + secure_filename(f.filename)
+            img_path = secure_filename(f.filename)
             return str(img_path)
         else:
             return abort(500, "File couldn't be found")
     else:
-        return abort(400, "Error getting file")
+        return abort(500, "Error getting file")
 
 # Error handlers.
 @app.route('/pokiki', methods=["GET"])
 def pokikiGET():
     if request.args.get("image") is not None:
-        return app.send_static_file(request.args.get("image"))
+        image_path = "pokiki_images/" + request.args.get("image")
+        return app.send_static_file(image_path)
     else:
         return app.send_static_file('pokiki.html')
 

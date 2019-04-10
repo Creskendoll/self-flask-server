@@ -58,7 +58,7 @@ def main(argv):
     inputfile = ''
     outputfile = ''
     
-    quality = 4
+    quality = 2
     splitByHorizontal = 100
     splitByVertical = 100
     try:
@@ -133,6 +133,8 @@ def main(argv):
     print('Total elapsed time:', elapsed)
     # out_img = rootFolder / outputfile
     print("Saving result image to:", outputfile)
+    if not os.path.dirname(outputfile):
+        os.mkdir(os.path.dirname(outputfile))
     cv2.imwrite(outputfile, resultIMG)
 
 def processImage(self, img, args=None):

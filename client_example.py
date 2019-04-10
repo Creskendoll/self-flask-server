@@ -2,11 +2,11 @@ import requests
 
 out_file = "./temp/client.jpg"
 
-local = "http://localhost:5000/pokiki"
+local = "http://localhost:5000/vm/pokiki"
 public = "http://www.kenansoylu.com/pokiki"
-gcloud = "http://35.198.148.117:5000/pokiki"
+gcloud = "http://35.204.79.178:5000/pokiki"
 
-img = "D:\Code\BAU\IMG\pokiki\in\lenna.png"
+img = "E:\\CODE\\a.jpg"
 # './static/images/about/02.jpg'
 with open(img, 'rb') as f:
     r = requests.post(local, files={'image': f}, stream=True)
