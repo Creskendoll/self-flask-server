@@ -133,8 +133,8 @@ def main(argv):
     print('Total elapsed time:', elapsed)
     # out_img = rootFolder / outputfile
     print("Saving result image to:", outputfile)
-    if not os.path.dirname(outputfile):
-        os.mkdir(os.path.dirname(outputfile))
+    if not os.path.isdir(os.path.dirname(outputfile)):
+        os.makedirs(os.path.dirname(outputfile))
     cv2.imwrite(outputfile, resultIMG)
 
 def processImage(self, img, args=None):

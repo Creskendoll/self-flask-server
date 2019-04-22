@@ -63,7 +63,7 @@ def _proxy():
     #print("HOST:", request.host_url)
     #print("Request URL:", request.url)
     vm_URL = "http://35.204.79.178:5000/pokiki"
-    #vm_URL = "http://localhost:5000/pokiki"
+    # vm_URL = "http://localhost:5000/pokiki"
 
     # if "options" in copy.deepcopy(request.form):
     #     options = copy.deepcopy(request.form)["options"]
@@ -117,7 +117,7 @@ def pokiki():
         print("received IMG:", f.filename)
         if not os.path.isdir(out_folder):
             print("Creating folder:", out_folder)
-            os.mkdir(out_folder)
+            os.makedirs(out_folder)
         file_path = os.path.join(str(out_folder.resolve()), secure_filename(f.filename))
 
         # Save file 
@@ -135,7 +135,7 @@ def pokiki():
         else:
             print("Starting program.")
             try:
-                subprocess.run(["python", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file, 
+                subprocess.run(["python3", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file, 
                                 "-x", options["X"], "-y", options["Y"], "-q", options["Q"]])
             except Exception:
                 return abort(500, "Subprocess failed")

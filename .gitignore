@@ -2,4 +2,5 @@
 .DS_Store
 env
 venv
-temp/*.jpg
+temp/
+static/pokiki_images/

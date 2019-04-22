@@ -6,8 +6,7 @@ local = "http://localhost:5000/vm/pokiki"
 public = "http://www.kenansoylu.com/pokiki"
 gcloud = "http://35.204.79.178:5000/pokiki"
 
-img = "E:\\CODE\\a.jpg"
-# './static/images/about/02.jpg'
+img = "/home/ken/Pictures/a.jpg"
 with open(img, 'rb') as f:
     r = requests.post(local, files={'image': f}, stream=True)
     if r.status_code == 200:

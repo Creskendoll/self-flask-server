@@ -8,7 +8,7 @@ from pathlib import Path
 rootFolder = Path('./')
 tilesFolder = rootFolder / "tiles/"
 dataFilePath = rootFolder / 'out/data.json'
-data = {}
+data = []
 
 if os.path.isfile(dataFilePath):
     print("File already exists, overwrite existing file? y/n")
@@ -18,14 +18,17 @@ if os.path.isfile(dataFilePath):
             img_path = tilesFolder / imgName
             if os.path.isfile(img_path):
                 # Loads an image from a file passed as argument.
-                img = cv2.imread(str(img_path), cv2.IMREAD_UNCHANGED)
+                img = cv2.imread(str(img_path))
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                
                 if img is None:
                     print("Can't open", img_path)
                     quit()
                 print("Processing Image:", imgName)
-                data[imgName] = {}
-                data[imgName]['average_color'] = Helper.getAverageColor(img)
-                # data[imgName]['dominant_color'] = Helper.getDominantColor(img)
+                data_dict = {}
+                data_dict["name"] = imgName
+                data_dict["average_color"] = Helper.getAverageColor(img)
+                data.append(data_dict)
             else:
                 print("Not a file:", img_path)
         with open(dataFilePath, 'w') as outfile:
