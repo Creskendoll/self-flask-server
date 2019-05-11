@@ -9,6 +9,3 @@ opencv-python
 Flask
 scipy
 requests
-# ecdsa
-# paramiko
-# pycrypto

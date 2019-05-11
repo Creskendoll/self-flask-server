@@ -13,7 +13,6 @@ import subprocess
 import io
 import requests
 import ast
-import copy
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -28,14 +27,6 @@ app.config.from_object('config')
 # csrf.exempt(api_blueprint)
 # app.register_blueprint(api_blueprint)
 # api = restful.Api(app, decorators=[csrf_protect.exempt])
-#db = SQLAlchemy(app)
-
-# Automatically tear down SQLAlchemy.
-'''
-@app.teardown_request
-def shutdown_session(exception=None):
-    db_session.remove()
-'''
 
 # Login required decorator.
 '''
@@ -65,10 +56,6 @@ def _proxy():
     vm_URL = "http://35.204.79.178:5000/pokiki"
     # vm_URL = "http://localhost:5000/pokiki"
 
-    # if "options" in copy.deepcopy(request.form):
-    #     options = copy.deepcopy(request.form)["options"]
-    #     vm_URL = ast.literal_eval(copy.deepcopy(options))["Redirect_URL"]
-        
     redirect_url = request.url.replace(request.host_url+"vm/pokiki", vm_URL)
     print("Redirect URL:", redirect_url)
 
@@ -86,6 +73,23 @@ def _proxy():
 
     response = Response(resp.content, resp.status_code, headers)
     return response
+
+@app.route('/pokemoned/post-image', methods=['GET', 'POST'])
+def uploadImage():
+    out_folder = Path("./static/pokiki_images/")
+    file = None
+    if "image" in request.files:
+        file = request.files['image']
+    else:
+        return abort(400, "No image provided")
+    
+    # Save file 
+    in_memory_file = io.BytesIO(file.read())
+    file_path = os.path.join(str(out_folder.resolve()), secure_filename(file.filename))
+    with open(file_path,'wb') as out: ## Open temporary file as bytes
+        out.write(in_memory_file.read())
+
+    return app.send_static_file("pokiki_images/" + secure_filename(file.filename))
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():
@@ -175,10 +179,6 @@ if not app.debug:
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
-
-# Default port:
-# if __name__ == '__main__':
-#     app.run()
 
 # Or specify port manually:
 
