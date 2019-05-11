@@ -852,6 +852,14 @@ header{
 .github_container :hover {
   color: #232323;
 }
+.linkedin-home :hover {
+  color: #232323;
+}
+.linkedin-home i {
+  color: #29B6F6;
+  vertical-align: middle;
+  font-size: 50px;
+}
 
 /*===============================================================================
 16.   Carousel
