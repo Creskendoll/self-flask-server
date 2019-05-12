@@ -3,7 +3,6 @@
 #----------------------------------------------------------------------------#
 
 from flask import Flask, request, send_file, abort, Response
-# from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
 from werkzeug.utils import secure_filename
@@ -13,6 +12,8 @@ import subprocess
 import io
 import requests
 import ast
+from flask_cors import CORS, cross_origin
+import json
 
 from flask_wtf import CSRFProtect
 from flask_wtf.csrf import CSRFProtect
@@ -75,21 +76,54 @@ def _proxy():
     return response
 
 @app.route('/pokemoned/post-image', methods=['GET', 'POST'])
+@cross_origin(headers=['Content-Type'])
 def uploadImage():
-    out_folder = Path("./static/pokiki_images/")
-    file = None
-    if "image" in request.files:
-        file = request.files['image']
-    else:
-        return abort(400, "No image provided")
-    
-    # Save file 
-    in_memory_file = io.BytesIO(file.read())
-    file_path = os.path.join(str(out_folder.resolve()), secure_filename(file.filename))
-    with open(file_path,'wb') as out: ## Open temporary file as bytes
-        out.write(in_memory_file.read())
+    pokiki_program_root = Path("programs/Pokiki")
+    result_images = []
+    out_folder = Path("./temp/serverCache/")
+    for file in request.files.getlist("image"):
+        # Save file
+        file_path = os.path.join(str(out_folder.resolve()), secure_filename(file.filename))
+        file.save(file_path)
+        file.close()
 
-    return app.send_static_file("pokiki_images/" + secure_filename(file.filename))
+        options = {
+            "X" : "64",
+            "Y" : "64",
+            "Q" : "2",
+            "GetExisting" : "False"
+        }
+
+        pokiki_program = pokiki_program_root / "Program.py"
+
+        result_file = os.path.join(str(Path("./static/pokiki_images/").resolve()), secure_filename(file.filename))
+
+        # if options["GetExisting"]=="True" and os.path.isfile(result_file):
+        #     print("File already exists in server. Skipping program executiion.")
+        # else:
+        print("Starting program.")
+        try:
+            subprocess.run(["python3", str(pokiki_program.resolve()), "-i", file_path, "-o", result_file, 
+                            "-x", options["X"], "-y", options["Y"], "-q", options["Q"]])
+        except Exception:
+            return abort(500, "Subprocess failed")
+        print("Result file:", result_file)
+
+        if os.path.isfile(result_file):
+            result_images.append(secure_filename(file.filename))
+        else:
+            return abort(500, "File couldn't be found")
+
+    res = {
+        "images" : result_images
+    }
+    response = app.response_class(
+        response=json.dumps(res),
+        status=200,
+        mimetype='application/json'
+    )
+    # return app.send_static_file("pokiki_images/" + secure_filename(files[0].filename))
+    return response
 
 @app.route('/pokiki', methods=['POST'])
 def pokiki():

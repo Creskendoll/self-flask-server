@@ -9,3 +9,4 @@ opencv-python
 Flask
 scipy
 requests
+flask_cors
