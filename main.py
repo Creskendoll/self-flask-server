@@ -75,6 +75,10 @@ def _proxy():
     response = Response(resp.content, resp.status_code, headers)
     return response
 
+@app.route('/pokemoned', methods=['GET', 'POST'])
+def pokemoned():
+    return app.send_static_file("pokemoned.html")
+
 @app.route('/pokemoned/post-image', methods=['GET', 'POST'])
 @cross_origin(headers=['Content-Type'])
 def uploadImage():
