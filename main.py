@@ -50,15 +50,17 @@ def login_required(test):
 def home():
     return app.send_static_file("index.html")
 
-@app.route('/vm/pokiki', methods=['POST', 'GET'])
-def _proxy():
-    #print("HOST:", request.host_url)
-    #print("Request URL:", request.url)
-    vm_URL = "http://35.204.79.178:5000/pokiki"
-    # vm_URL = "http://localhost:5000/pokiki"
+@cross_origin(headers=['Content-Type'])
+@app.route('/vm/<path:path>', methods=['POST', 'GET'])
+def _proxy(path):
+    vm_URL = "http://35.204.79.178:5000"
+    # vm_URL = "http://localhost:5000"
 
-    redirect_url = request.url.replace(request.host_url+"vm/pokiki", vm_URL)
-    print("Redirect URL:", redirect_url)
+    # print("PATH URL:", path)
+    # print("HOST URL:", request.host_url)
+    # print("Request URL:", request.url)
+    redirect_url = request.url.replace(request.host_url+"vm", vm_URL)    
+    # print("Redirect URL:", redirect_url)
 
     resp = requests.request(
         method=request.method,
@@ -75,11 +77,11 @@ def _proxy():
     response = Response(resp.content, resp.status_code, headers)
     return response
 
-@app.route('/pokemoned', methods=['GET', 'POST'])
+@app.route('/pokemoned', methods=['GET'])
 def pokemoned():
     return app.send_static_file("pokemoned.html")
 
-@app.route('/pokemoned/post-image', methods=['GET', 'POST'])
+@app.route('/pokemoned/post-image', methods=['POST'])
 @cross_origin(headers=['Content-Type'])
 def uploadImage():
     pokiki_program_root = Path("programs/Pokiki")
@@ -88,6 +90,9 @@ def uploadImage():
     for file in request.files.getlist("image"):
         # Save file
         file_path = os.path.join(str(out_folder.resolve()), secure_filename(file.filename))
+        if not os.path.isdir(out_folder):
+            print("Creating folder:", out_folder)
+            os.makedirs(out_folder)
         file.save(file_path)
         file.close()
 
