@@ -96,12 +96,19 @@ def uploadImage():
         file.save(file_path)
         file.close()
 
-        options = {
-            "X" : "64",
-            "Y" : "64",
-            "Q" : "2",
-            "GetExisting" : "False"
-        }
+        options = None
+        if "options" in request.form:
+            options = request.form["options"]
+        else:
+            options = {
+                "X" : "64",
+                "Y" : "64",
+                "Q" : "1",
+                "GetExisting" : "False"
+            }
+
+        if type(options) is str:
+            options = ast.literal_eval(options)
 
         pokiki_program = pokiki_program_root / "Program.py"
 
