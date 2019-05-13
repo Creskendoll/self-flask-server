@@ -1,0 +1,25 @@
+.question-container {
+    margin : 5em;
+    background-color: cadetblue;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+}
+.question-container:hover {
+    background-color: chartreuse;
+}
+
+.question-body {
+    background-color: aqua;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.expand-arrow-container {
+    float: right;
+}
+
+.expand-arrow-image {
+    height: 20px;
+    width: 20px;
+}

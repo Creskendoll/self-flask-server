@@ -45,6 +45,9 @@ def login_required(test):
 # Controllers.
 #----------------------------------------------------------------------------#
 
+@app.route("/cloud-applications")
+def hw():
+    return app.send_static_file("cloudApp.html")
 
 @app.route('/')
 def home():
@@ -229,8 +232,6 @@ if not app.debug:
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
-
-# Or specify port manually:
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
