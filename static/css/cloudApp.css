@@ -1,18 +1,29 @@
+body {
+    background-color: currentColor;
+}
+
 .question-container {
-    margin : 5em;
+    margin-top : 5em;
     background-color: cadetblue;
     cursor: pointer;
     border-radius: 8px;
-    padding: 10px;
+    padding: 1em;
 }
 .question-container:hover {
     background-color: chartreuse;
 }
+.question-head {
+    font-size: medium;
+    color : black;
+    font-family: sans-serif;
+}
 
 .question-body {
-    background-color: aqua;
+    background-color: lightgray;
     border-radius: 8px;
-    padding: 5px;
+    padding: 10px;
+    font-size: large;
+    color : black;
 }
 
 .expand-arrow-container {
@@ -20,6 +31,6 @@
 }
 
 .expand-arrow-image {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
 }

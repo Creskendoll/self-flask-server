@@ -16,50 +16,77 @@
 <body>
 
     <section class="container">
-        <div class="h-100 question-container">
-            <div class="question-head" data-toggle="collapse" data-target="#q1">
-                Why is this?
+        <div class="h-100 question-container" data-toggle="collapse" data-target="#q1">
+            <div class="question-head">
+                AWS üzerinde Amazon Linux AMI instance veya Google Compute Linux Instance veya 
+                Microsoft Azure sunucu oluşturup bu sunucuya Putty kullanarak nasıl bağlanacağımızı yazınız.
                 <div class="expand-arrow-container">
                     <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-left-b-512.png" alt="expand" class="expand-arrow-image" />
                 </div>
-                <div id="q1" class="collapse question-body">
-                    Because
-                </div>
             </div>
+        </div>
+        <div id="q1" class="collapse question-body">
+            <span>
+                Google Linux Instance oluşturmak için <a href="https://cloud.google.com/compute/" target="_blank"> Google Cloud Platform'una</a>
+                giriş yaptıktan sonra Linux VM'i yaratılır. Benim tercihim Ubuntu 18.04 LTS. 
+                VM yaratıldığında SSH servisi çalışıyor olarak gelir, yani manuel olarak açmaya gerek yoktur.
+                <br>
+                SSH ile bağlanmak için ihtiyacımız olanlar: <strong>Kullanıcı adımız,</strong> <strong>VM IP'si,</strong> <strong>Private key dosyası.</strong>
+                <br>
+                <br>
+                <strong>Kullanıcı adımız</strong> varsayılan olarak Google hesabımızın mail adıdır. Örnek: <code>[KULLANICI_ADI]@gmail.com</code> 
+                Platform içerisinde kullanıcı oluşturmak ve farklı erişim hakları tanımlamak da mümkündür. Kullanıcıların VM'e bağlanmak için private key'e ihtiyaçları vardır.
+                <br>
+                <strong>VM IP'sine</strong> <a href="https://console.cloud.google.com">Cloud Platform</a> Compute Engine VM Instances sayfasından erişebiliriz.
+                <br>
+                <strong>Private ve public key</strong> dosyalarını oluşturmak için PuTTYgen veya OpenSSH programları kullanılabilir. Ardından <code>public key'in</code> VM'in metadasına eklenmesi gerekmektedir.
+                <br>
+                <br>
+                <a href="static/documents/google_compute_engine" download>Google Compute Engine private key dosyamı indirmek için tıklayın.</a>
+                <br>
+                OpenSSH ile benim VM'ime bağlanmak için <code>google_compute_engine</code> dosyasının olduğu directory içerisinde iken: 
+                <code>ssh -i google_compute_engine kenso@35.204.79.178</code>
+                <br>
+                Bağlantı aynı şekilde PuTTY kullanarak da mümkünüdür ancak şahsen Windows ortamında 
+                <a href="https://cmder.net/" target="_blank">CMDER</a> uygulamasını tercih ediyorum.
+                <br>
+                <br>
+                <a href="https://cloud.google.com/compute/docs/instances/connecting-advanced#thirdpartytools" target="_blank">Kaynak</a>
+            </span>
         </div>
 
-        <div class="h-100 question-container">
-            <div class="question-head" data-toggle="collapse" data-target="#q2">
-                Why is this?
+        <div class="h-100 question-container" data-toggle="collapse" data-target="#q2">
+            <div class="question-head">
+                Uluslararası bir finans kuruluşunun sistem admini olarak görev alıyorsunuz. On-premises 
+                sistem içerisinde yüzlerce terabyte veri bulunuyor ve bu bu veriyi cloud kullanarak analiz etmek istiyorsunuz.
+                Nasıl bir yöntem izlersiniz?
                 <div class="expand-arrow-container">
                     <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-left-b-512.png" alt="expand" class="expand-arrow-image" />
-                </div>
-                <div id="q2" class="collapse question-body">
-                    Because
                 </div>
             </div>
         </div>
-        <div class="h-100 question-container">
-            <div class="question-head" data-toggle="collapse" data-target="#q3">
-                Why is this?
-                <div class="expand-arrow-container">
-                    <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-left-b-512.png" alt="expand" class="expand-arrow-image" />
-                </div>
-                <div id="q3" class="collapse question-body">
-                    Because
-                </div>
-            </div>
-        </div>
-        <div class="h-100 question-container">
-            <div class="question-head" data-toggle="collapse" data-target="#q4">
-                Why is this?
-                <div class="expand-arrow-container">
-                    <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-arrow-left-b-512.png" alt="expand" class="expand-arrow-image" />
-                </div>
-                <div id="q4" class="collapse question-body">
-                    Because
-                </div>
-            </div>
+        <div id="q2" class="collapse question-body">
+            Veri analizi için cloud servislerinin sağladığı çeşitli Big Data çözümleri var. Google'ın sağladığı başlıca çözümler 
+            <a href="https://cloud.google.com/bigquery/" target="_blank">Google BigQuery</a> ve 
+            <a href="https://cloud.google.com/dataflow/" target="_blank">Clod Dataflow.</a> Ancak bu çözümleri kullanabilmek için verimizin cloud tarafında tutuluyor olması gerekiyor. 
+            Kalıcı olarak tutulmuyor olsa da cloud tafında verilerin işlenebilmesi için verilerin bir şekilde cloud tarafına transfer edilmesi gerekiyor. Bir seferlik transfer yerine kalıcı olarak 
+            cloud storage çözümü kullanmak daha optimal.
+            <br>
+            <br>
+            Veriyi cloud ortamında analiz etmek için öncelikle cloud'a yüklemek gerekiyor. Yüzlerce terabyte durumunda bu işlem uzun sürecek ve kaynak tüketecektir. 
+            Veri on-premise'den cloud'a aktarılmak istenirse 1 petabyte'lık (1000 terabyte) veri 10 Gbps'lik bandwidth ile 12 günde aktarılabiliyor. 
+            Aktarımı hızlandırmak için Google'ın sağladığı <a href="https://cloud.google.com/interconnect/docs/how-to/direct-peering" target="_blank">Direct Peering</a> 
+            ve <a href="https://cloud.google.com/hybrid-connectivity/">Hybrid Connectivity</a> servisleri mevcut.
+            <br>
+            <br>
+            Optimal olarak business logic on-premises sistemlerde çalışırken, veriler cloud tarafında saklanabilir. 
+            Böylelikle hem on-premise çözümden vaz geçilmez hem de veriler daha efektif bir biçimde analiz edilebilir. 
+            Bunun bir getirisi de sadece analiz gerektiğinde işlem gücü masrafınanın karşılanmasıdır. 
+            Yani işe yaramayacak işlem gücüne boşuna masraf ayrılmak durumunda kalınmayacaktır. Bu masraf cloud storage için ayrılabilir.
+            <br>
+            <br>
+            <a href="https://cloud.google.com/solutions/transferring-big-data-sets-to-gcp" target="_blank">Büyük verilerin Cloud'a aktarılması.</a>
+
         </div>
     </section>
 
@@ -67,9 +94,11 @@
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
+    <script src="static/js/bootstrap.min.js"></script>
+
 	<script src="static/js/cloudApp.js"></script>
 </body>
 </html>
