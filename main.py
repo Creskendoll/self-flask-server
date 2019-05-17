@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, request, send_file, abort, Response
+from flask import Flask, request, abort, Response
 import logging
 from logging import Formatter, FileHandler
 from werkzeug.utils import secure_filename
@@ -12,22 +12,15 @@ import subprocess
 import io
 import requests
 import ast
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 import json
 
-from flask_wtf import CSRFProtect
-from flask_wtf.csrf import CSRFProtect
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 app.config.from_object('config')
-# csrf = CSRFProtect(app)
-# api_blueprint = Blueprint('api', __name__)
-# csrf.exempt(api_blueprint)
-# app.register_blueprint(api_blueprint)
-# api = restful.Api(app, decorators=[csrf_protect.exempt])
 
 # Login required decorator.
 '''

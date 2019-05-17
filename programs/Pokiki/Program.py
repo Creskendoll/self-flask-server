@@ -92,6 +92,10 @@ def main(argv):
         sys.exit()
 
     input_picture = Image.open(inputfile)
+    if input_picture.format == "PNG":
+        rgba_img = input_picture.convert("RGBA")
+        input_picture = Image.new("RGB", input_picture.size, "WHITE")
+        input_picture.paste(rgba_img, (0, 0), rgba_img)
 
     startTime = time.time()
     time.clock()    

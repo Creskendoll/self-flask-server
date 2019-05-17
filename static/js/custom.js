@@ -244,7 +244,7 @@ const N = 4;
 const interval = 3000;
 
 function cycleImages() {
-  let img_name = "url('static/images/background/" + img_index.toString() + ".jpg')";
+  let img_name = "url('images/background/" + img_index.toString() + ".jpg')";
   $('#main_banner').css('background-image', img_name)
   $('#main_banner').css({
     "background-size": "cover",
@@ -266,7 +266,7 @@ function startCycle() {
 }
 let loaded_count = 0;
 Array.apply(null, {length: N}).map(Number.call, Number).forEach(i => {
-  let img_path = 'static/images/background/' + i.toString() + '.jpg';
+  let img_path = 'images/background/' + i.toString() + '.jpg';
   let downloadingImage = new Image();
   downloadingImage.onload = function () {
     loaded_count++;
@@ -310,8 +310,8 @@ $(".carousel-img-container").each(function (carousel_item_index, _) {
   let photo_items = Array(PHOTO_COUNT_SECTION).fill().map((_, i) => {
     let img_index = ((carousel_item_index*PHOTO_COUNT_SECTION) + i);
     if (img_index < PHOTO_RANGE) {
-      let img_name = "static/images/portfolio/gallery/"+ img_index.toString()+".jpg";
-      let a_href =  "static/images/portfolio/gallery/"+ img_index.toString()+".jpg";
+      let img_name = "images/portfolio/gallery/"+ img_index.toString()+".jpg";
+      let a_href =  "images/portfolio/gallery/"+ img_index.toString()+".jpg";
       
       let photo_item = $(".photo-item").clone();
       photo_item.attr("hidden", false);

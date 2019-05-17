@@ -28,6 +28,7 @@ body {
 
 .expand-arrow-container {
     float: right;
+    display: contents;
 }
 
 .expand-arrow-image {
