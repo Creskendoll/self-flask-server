@@ -32,6 +32,11 @@
                 Google Linux Instance oluşturmak için <a href="https://cloud.google.com/compute/" target="_blank"> Google Cloud Platform'una</a>
                 giriş yaptıktan sonra Linux VM'i yaratılır. Benim tercihim Ubuntu 18.04 LTS. 
                 VM yaratıldığında SSH servisi çalışıyor olarak gelir, yani manuel olarak açmaya gerek yoktur.
+                <div class="ss-container">
+                    <img src="images/cloudApps/Capture.PNG" class="screen-shot" alt="capture">
+                    <img src="images/cloudApps/Capture2.PNG" class="screen-shot" alt="capture">
+                    <img src="images/cloudApps/Capture3.PNG" class="screen-shot" alt="capture">
+                </div>
                 <br>
                 SSH ile bağlanmak için ihtiyacımız olanlar: <strong>Kullanıcı adımız,</strong> <strong>VM IP'si,</strong> <strong>Private key dosyası.</strong>
                 <br>
@@ -40,16 +45,22 @@
                 Platform içerisinde kullanıcı oluşturmak ve farklı erişim hakları tanımlamak da mümkündür. Kullanıcıların VM'e bağlanmak için private key'e ihtiyaçları vardır.
                 Benim durumumda <code>keso</code> kullancısı sonradan eklenmiş bir kullanıcıdır.
                 <br>
+                <img src="images/cloudApps/Capture6.PNG" class="screen-shot" alt="capture">
                 <strong>VM IP'sine</strong> <a href="https://console.cloud.google.com">Cloud Platform</a> Compute Engine VM Instances sayfasından erişebiliriz.
                 <br>
                 <strong>Private ve public key</strong> dosyalarını oluşturmak için PuTTYgen veya OpenSSH programları kullanılabilir. Ardından <code>public key'in</code> VM'in metadasına eklenmesi gerekmektedir.
                 <br>
+                <img src="images/cloudApps/Capture4.PNG" class="screen-shot" alt="capture">
+                <img src="images/cloudApps/Capture5.PNG" class="screen-shot" alt="capture">
+
                 <br>
                 <a href="documents/google_compute_engine" download>Google Compute Engine private key dosyamı indirmek için tıklayın.</a>
                 <br>
                 OpenSSH ile benim VM'ime bağlanmak için <code>google_compute_engine</code> dosyasının olduğu directory içerisinde iken: 
                 <code>ssh -i google_compute_engine kenso@35.204.79.178</code>
                 <br>
+                <img src="images/cloudApps/Capture7.PNG" class="screen-shot" alt="capture">
+
                 Bağlantı aynı şekilde PuTTY kullanarak da mümkünüdür ancak şahsen Windows ortamında 
                 <a href="https://cmder.net/" target="_blank">CMDER</a> uygulamasını tercih ediyorum.
                 <br>
