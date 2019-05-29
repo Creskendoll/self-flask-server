@@ -98,6 +98,10 @@ def pokikiGET():
     else:
         return app.send_static_file('pokemoned.html')
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return app.send_static_file("404.html"), 404
+
 if not app.debug:
     file_handler = FileHandler('error.log')
     file_handler.setFormatter(
