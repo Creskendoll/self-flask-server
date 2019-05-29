@@ -141,8 +141,5 @@ def main(argv):
         os.makedirs(os.path.dirname(outputfile))
     cv2.imwrite(outputfile, resultIMG)
 
-def processImage(self, img, args=None):
-    mainWithIMG(img, args)
-
 if __name__=='__main__':
     main(sys.argv[1:])
