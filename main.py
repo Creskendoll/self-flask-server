@@ -16,8 +16,9 @@ from flask_cors import cross_origin
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.config.from_object('config')
 
-VM_URL = "http://35.204.158.54:5001"
-# VM_URL = "http://localhost:5001"
+PROXY_URL = "http://35.204.158.54:5001"
+# PROXY_URL = "http://localhost:5001"
+# PROXY_URL = "http://192.168.0.55:5001"
 
 # Login required decorator.
 '''
@@ -64,7 +65,7 @@ def proxy(redirect_url):
 @app.route('/vm/<path:path>', methods=['POST', 'GET'])
 def vm(path):
 
-    redirect_url = request.url.replace(request.host_url+"vm", VM_URL)
+    redirect_url = request.url.replace(request.host_url+"vm", PROXY_URL)
 
     return proxy(redirect_url)
 
@@ -73,7 +74,7 @@ def vm(path):
 def pokikiGET():
     if request.args.get("image") is not None:
 
-        redirect_url = VM_URL + "/pokemoned?image=" + request.args.get("image")
+        redirect_url = PROXY_URL + "/pokemoned?image=" + request.args.get("image")
 
         return proxy(redirect_url)
     else:
@@ -82,7 +83,7 @@ def pokikiGET():
 @app.route('/pokemoned/post-image', methods=["POST"])
 @cross_origin(headers=['Content-Type'])
 def postImg():
-    redirect_url = VM_URL + "/pokemoned/post-image"
+    redirect_url = PROXY_URL + "/pokemoned/post-image"
     return proxy(redirect_url)
         
 # Error handlers.

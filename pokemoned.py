@@ -43,9 +43,9 @@ def uploadImage():
         # print(type(file))
 
         # Create folder if not exists
-        if not os.path.isdir(out_folder):
-            print("Creating folder:", out_folder)
-            os.makedirs(out_folder)
+        if not os.path.isdir(str(out_folder)):
+            print("Creating folder:", str(out_folder))
+            os.makedirs(str(out_folder))
 
         result_file = os.path.join(str(Path("./static/pokiki_images/").resolve()), secure_filename(file.filename))
         # Save file

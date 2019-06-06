@@ -15,7 +15,7 @@ class HelperOBJ:
 
         self.dataFile = self.rootFolder / 'out/data.json'
 
-        self.data = json.loads(open(self.dataFile).read())
+        self.data = json.loads(open(str(self.dataFile)).read())
 
     def findNearestNeighbor(self, color, dominant=False):
         r, g, b = color[0], color[1], color[2]
