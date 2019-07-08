@@ -281,11 +281,20 @@ Array.apply(null, {length: N}).map(Number.call, Number).forEach(i => {
 //=====================================================================================
 //  11.   MAIL
 //=====================================================================================
-$("#send").click(function () {
+// $("#send").click(function () {
+//   let mail_subject = $("#mailSubject").val();
+//   let mail_body = $("#mailMessage").val();
+//   let mailApp = "mailto:contact@kenansoylu.com?subject=" + mail_subject + "&body=" + mail_body;
+//   window.open(mailApp);
+// });
+
+$("#send").click(() => {
+  let sender_name = $("#mailName").val();
+  let sender_mail = $("#senderMail").val();
   let mail_subject = $("#mailSubject").val();
   let mail_body = $("#mailMessage").val();
-  let mailApp = "mailto:contact@kenansoylu.com?subject=" + mail_subject + "&body=" + mail_body;
-  window.open(mailApp);
+
+  console.log(sender_name, sender_mail, mail_subject, mail_body)
 });
 
 //=====================================================================================

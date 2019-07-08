@@ -8,13 +8,26 @@ from logging import Formatter, FileHandler
 import os
 import requests
 from flask_cors import cross_origin
+from flask_mail import Mail, Message
 
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
-
 app = Flask(__name__, static_folder='static', static_url_path='')
 app.config.from_object('config')
+
+#----------------------------------------------------------------------------#
+# Mail.
+#----------------------------------------------------------------------------#
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+
+app.config['MAIL_USERNAME'] =  'Portfolio Contact' # enter your name here
+app.config['MAIL_DEFAULT_SENDER'] = 'ken.soylu@hotmail.com' # enter your email here
+app.config['MAIL_PASSWORD'] = '3hardcore1' # enter your password here
+
+mail = Mail(app)
 
 PROXY_URL = "http://35.204.158.54:5001"
 # PROXY_URL = "http://localhost:5001"
@@ -86,6 +99,25 @@ def postImg():
     redirect_url = PROXY_URL + "/pokemoned/post-image"
     return proxy(redirect_url)
         
+@app.route('/send-mail', methods=['POST'])
+@cross_origin(headers=['Content-Type'])
+def send_mail():
+    sender_name = request.form["sender_name"]
+    sender_mail = request.form["sender_mail"]
+    subject = request.form["sender_subject"]
+    body = request.form["sender_body"]
+	
+    # Send mail to ooptica
+    msg = Message(subject, recipients=['info@ooptica.ist'])
+    msg.body = body + "\n" + sender_mail + "\n" + sender_name
+    mail.send(msg)
+
+    # Send another mail to sender
+    thanks_msg = Message("Thanks for your message.", recipients=[sender_mail])
+    thanks_msg.body = "We thank you for your message..."
+    mail.send(thanks_msg)
+
+
 # Error handlers.
 @app.errorhandler(404)
 def not_found_error(error):

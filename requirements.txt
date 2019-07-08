@@ -10,3 +10,4 @@ Flask
 scipy
 requests
 flask_cors
+Flask-Mail
