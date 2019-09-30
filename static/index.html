@@ -244,12 +244,12 @@
 									target="_blank">TatilSepeti</a>
 								as an automated test developer. I worked at <a
 									href="http://www.phimajor.com/" target="_blank">PhiMajor Solutions</a> where I got to develop form 
-									base web applications using Sharepoint, Nintex, ASP.Net and React.
+									based web applications using Sharepoint, Nintex, ASP.Net and React.
 							</p>
 							<br>
 							<p>
-								I am currently working as a course instructor for <a href="https://idtech.com" target="_blank">iD Tech</a> in St. Paul, Minnesota. 
-								This job requires me teaching Python to kids aged 13 - 17. I mostly teach introduction level Python and machine learning. 
+								My latest experience was working as a course instructor at <a href="https://idtech.com" target="_blank">iD Tech</a> in St. Paul, Minnesota. 
+								This job required me to teach Python to kids aged 13 - 17. I mostly taught introduction level Python and machine learning. 
 							</p>
 						</div>
 					</div>
@@ -548,33 +548,36 @@
 							</div>
 						</div>
 						<div class="col-md-8 col-lg-8">
-							<form class="form contact_message" id="contact-form" action="#" method="post">
+							<form class="form contact_message" id="contact-form">
 								<div class="row">
 									<div class="col-md-6 col-lg-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="mailName" name="name" placeholder="Your Name" />
+											<input class="form-control" type="text" id="mailName" placeholder="Your Name" />
 										</div>
 									</div>
 									<div class="col-md-6 col-lg-6">
 										<div class="form-group">
-											<input class="form-control" type="email" id="senderMail" name="email" placeholder="Email Address" />
+											<input class="form-control" type="email" id="senderMail" placeholder="Email Address" />
 										</div>
 									</div>
 									<div class="col-md-12 col-lg-12">
 										<div class="form-group">
-											<input class="form-control" type="text" id="mailSubject" name="subject"
+											<input class="form-control" type="text" id="mailSubject"
 												placeholder="Subject" />
 										</div>
 									</div>
 									<div class="col-md-12 col-lg-12">
 										<div class="form-group">
-											<textarea class="form-control" id="mailMessage" name="message" rows="7"
+											<textarea class="form-control" id="mailMessage" rows="7"
 												placeholder="Message"></textarea>
 										</div>
 									</div>
-									<div class="col-md-12 col-lg-12">
+									<div class="col-md-12 col-lg-12" style="display: flex;">
 										<div class="form-group">
 											<input class="btn btn-default" id="send" value="Send Mail" />
+										</div>
+										<div id="mail-loading" style="display: none;">
+											<img src="images/fancybox/fancybox_loading.gif" alt="image" style="height: 50px; width: 50px;" />
 										</div>
 									</div>
 								</div>

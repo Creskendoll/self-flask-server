@@ -289,12 +289,31 @@ Array.apply(null, {length: N}).map(Number.call, Number).forEach(i => {
 // });
 
 $("#send").click(() => {
-  let sender_name = $("#mailName").val();
-  let sender_mail = $("#senderMail").val();
-  let mail_subject = $("#mailSubject").val();
-  let mail_body = $("#mailMessage").val();
 
-  console.log(sender_name, sender_mail, mail_subject, mail_body)
+  $("#mail-loading").css("display", "");
+
+  const data = {
+    "sender_name" : $("#mailName").val(),
+    "sender_mail" : $("#senderMail").val(),
+    "mail_subject" : $("#mailSubject").val(),
+    "mail_body" : $("#mailMessage").val()
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "/send-mail",
+    data: data,
+    success: function (msg, status, jqXHR) {
+      alert("Thanks for your message! I'll try to respond ASAP!")
+      $("#mail-loading").css("display", "none");
+    },
+    error: function (jqXHR, textStatus, errorThrown)
+    {
+      alert("Couldn't send message... Sry :(")
+      $("#mail-loading").css("display", "none");
+    },
+    dataType: "json"
+  });
 });
 
 //=====================================================================================
