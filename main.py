@@ -30,7 +30,7 @@ app.config['MAIL_PASSWORD'] = '3hardcore1' # enter your password here
 
 mail = Mail(app)
 
-PROXY_URL = "http://35.204.158.54:5001"
+PROXY_URL = "http://34.89.189.41:5001"
 # PROXY_URL = "http://localhost:5001"
 # PROXY_URL = "http://192.168.0.55:5001"
 
@@ -129,15 +129,15 @@ def send_mail():
 def not_found_error(error):
     return app.send_static_file("404.html"), 404
 
-if not app.debug:
-    file_handler = FileHandler('error.log')
-    file_handler.setFormatter(
-        Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
-    )
-    app.logger.setLevel(logging.INFO)
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
-    app.logger.info('errors')
+# if not app.debug:
+#     file_handler = FileHandler('error.log')
+#     file_handler.setFormatter(
+#         Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+#     )
+#     app.logger.setLevel(logging.INFO)
+#     file_handler.setLevel(logging.INFO)
+#     app.logger.addHandler(file_handler)
+#     app.logger.info('errors')
 
 #----------------------------------------------------------------------------#
 # Launch.
@@ -145,5 +145,6 @@ if not app.debug:
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    app.config["ENVIRONMENT"] = "development"
     app.run(host='0.0.0.0', port=port)
     

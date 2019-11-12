@@ -3,7 +3,7 @@ import Helper
 import numpy as np
 from pathlib import Path
 from PIL import Image
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 import time
 from functools import partial
 import sys, getopt
@@ -115,7 +115,7 @@ def main(argv):
     print('Image deconstruction:', elapsed)
 
     threadingTime = time.time()
-    with Pool(processes=4) as pool:
+    with Pool(processes=cpu_count()) as pool:
         func = partial(buildRows, splitByHorizontal, splitByVertical, quality)
         result_rows = pool.map(func, rows)
 

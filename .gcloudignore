@@ -19,3 +19,7 @@ __pycache__/
 /setup.cfg
 env/
 .vscode/
+temp/
+pokiki_images/
+Pipfile
+Pipfile.lock
