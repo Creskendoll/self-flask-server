@@ -41,184 +41,197 @@ Table of CSS Content arrage with every section name
 /*===================================================================================
 01.		Default Css
 =====================================================================================*/
-body{
-	font-family: 'Open Sans', sans-serif;
-	font-size: 15px;
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
   line-height: 28px;
   background-color: #616161;
 }
-h1,h2,h3,h4,h5,h6{
-   font-family: 'Poppins', sans-serif;
-   font-weight: 700;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
 }
-h1{
-	font-size: 36px;
-	line-height: 48px;
+h1 {
+  font-size: 36px;
+  line-height: 48px;
 }
-h2{
-	font-size: 32px;
-	line-height: 44px;
+h2 {
+  font-size: 32px;
+  line-height: 44px;
 }
-h3{
-	font-size: 24px;
-	line-height: 36px;
+h3 {
+  font-size: 24px;
+  line-height: 36px;
 }
-h4{
-	font-size: 18px;
-	line-height: 30px;
+h4 {
+  font-size: 18px;
+  line-height: 30px;
 }
-h5{
-	font-size: 16px;
-	line-height: 24px;
+h5 {
+  font-size: 16px;
+  line-height: 24px;
 }
-h6{
-	font-size: 14px;
-	line-height: 22px;
+h6 {
+  font-size: 14px;
+  line-height: 22px;
 }
-p{
-	margin: 0px;
+p {
+  margin: 0px;
 }
-img{
-    width: 100%;
-    height: auto;
+img {
+  width: 100%;
+  height: auto;
 }
-ul{
-	margin: 0;
-	padding: 0;
+ul {
+  margin: 0;
+  padding: 0;
 }
-ul li{
-	list-style-type: none;
+ul li {
+  list-style-type: none;
 }
-a{
-	display: inline-block;
-	font-family: 'Poppins', sans-serif;
+a {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
 }
-a:hover,a:focus,a.active{
-	text-decoration: none !important;
-	box-shadow: none !important;
+a:hover,
+a:focus,
+a.active {
+  text-decoration: none !important;
+  box-shadow: none !important;
 }
-*, ::after, ::before{
-	 outline: none !important;
+*,
+::after,
+::before {
+  outline: none !important;
 }
-.btn:focus,.btn:active {
-   outline: none !important;
-   box-shadow: none;
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none;
 }
-.btn{
-    padding: 10px 30px;
-    font-size: 14px;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 0px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.btn {
+  padding: 10px 30px;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 0px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
-.w_60{
-	width: 60%;
+.w_60 {
+  width: 60%;
 }
-.w_50{
-	width: 50%;
+.w_50 {
+  width: 50%;
 }
-.w_40{
-	width: 40%;
+.w_40 {
+  width: 40%;
 }
-.xy-center{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 11;
+.xy-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
 }
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before{
-	margin-left: 0px !important;
+[class^="flaticon-"]:before,
+[class*=" flaticon-"]:before {
+  margin-left: 0px !important;
 }
 /*=====================================================================================
 02.		Default Margin and Padding
 ========================================================================================*/
 /*  Margin 
 ======================*/
-.mx_10{
-	margin: 0px 10px;
+.mx_10 {
+  margin: 0px 10px;
 }
-.mt_5{
-	margin-top: 5px;
+.mt_5 {
+  margin-top: 5px;
 }
-.mt_15{
-    margin-top: 15px;
+.mt_15 {
+  margin-top: 15px;
 }
-.mt_60{
-	margin-top: 60px;
+.mt_60 {
+  margin-top: 60px;
 }
-.mt_30{
-	margin-top: 30px;
+.mt_30 {
+  margin-top: 30px;
 }
-.mt_100{
+.mt_100 {
   margin-top: 100px;
 }
-.ml_105{
-    margin-left: 105px;
+.ml_105 {
+  margin-left: 105px;
 }
-.mr_60{
+.mr_60 {
   margin-right: 60px;
 }
-.mb_15{
-    margin-bottom: 15px
+.mb_15 {
+  margin-bottom: 15px;
 }
-.mb_30{
-    margin-bottom: 30px
+.mb_30 {
+  margin-bottom: 30px;
 }
 /*  padding  
 ========================*/
-.p_30{
+.p_30 {
   padding: 30px;
 }
-.p_20{
+.p_20 {
   padding: 20px;
 }
-.py_60{
+.py_60 {
   padding: 60px 0px;
 }
-.py_80{
-	padding: 80px 0px;
+.py_80 {
+  padding: 80px 0px;
 }
-.pr_50{
+.pr_50 {
   padding-right: 50px;
 }
-.pt_15{
+.pt_15 {
   padding-top: 15px;
 }
-.pt_30{
-	padding-top: 30px;
+.pt_30 {
+  padding-top: 30px;
 }
-.pt_60{
-	padding-top: 60px;
+.pt_60 {
+  padding-top: 60px;
 }
-.pb_60{
-	padding-bottom: 60px;
+.pb_60 {
+  padding-bottom: 60px;
 }
-.pb_30{
-	padding-bottom: 30px;
+.pb_30 {
+  padding-bottom: 30px;
 }
 
 /*=======================================================================
 03.		Overlay Css
 =========================================================================*/
-.overlay_one,.overlay_two{
-    position: relative;
+.overlay_one,
+.overlay_two {
+  position: relative;
 }
-.overlay_one:before,.overlay_two:before{
+.overlay_one:before,
+.overlay_two:before {
   position: absolute;
-  content:" ";
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  content: " ";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: block;
-  z-index: 9
+  z-index: 9;
 }
 /*=======================================================================
 04.   Socal Media 2
 =========================================================================*/
-.socal_media_2 ul li{
+.socal_media_2 ul li {
   float: left;
   padding-right: 20px;
   font-size: 35px;
@@ -226,42 +239,45 @@ a:hover,a:focus,a.active{
 /*====================================================================
 05.		Main Title
 ======================================================================*/
-.section_title_1 .title span{
-    display: table;
-    font-size: 18px;
-    font-weight: 600;
-    padding-left: 35px;
+.section_title_1 .title span {
+  display: table;
+  font-size: 18px;
+  font-weight: 600;
+  padding-left: 35px;
 }
-.section_title_1{
+.section_title_1 {
   width: 60%;
 }
-.line_double{
-    position: relative;
-    text-transform: lowercase;
-    padding: 0 50px !important;
+.line_double {
+  position: relative;
+  text-transform: lowercase;
+  padding: 0 50px !important;
 }
-.line_double::before, .line_double::after{
-    background-color: #29B6F6;
+.line_double::before,
+.line_double::after {
+  background-color: #29b6f6;
 }
 .line_double::before {
-    left: 0;
+  left: 0;
 }
-.line_double::before, .line_double::after{
-	content: "";
-	position: absolute;
-    width: 25px;
-    height: 2px;
-    top: 50%;
+.line_double::before,
+.line_double::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  top: 50%;
 }
 .line_double::after {
-    right: 0;
+  right: 0;
 }
-.line_double::before, .line_double::after{
-	content: "";
-	position: absolute;
-    width: 25px;
-    height: 2px;
-    top: 50%;
+.line_double::before,
+.line_double::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  top: 50%;
 }
 /*====================================================================
 06.   background Image
@@ -270,108 +286,108 @@ a:hover,a:focus,a.active{
 /*====================================================================
 07.   Nav Menu Css
 ======================================================================*/
-.navbar{
-	padding:0px;
+.navbar {
+  padding: 0px;
 }
-header{
+header {
   z-index: 11;
 }
 
-.navbar-brand{
-	text-transform: uppercase;
-	font-weight: 700;
-	letter-spacing: 2px;
-	font-family: 'Poppins', sans-serif;
+.navbar-brand {
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: "Poppins", sans-serif;
 }
-.main_nav{
+.main_nav {
   background: #343436;
-	  width: 100%;
-    right: 0;
-    left: 0;
-    position: absolute;
-    padding: 15px 0;
-    min-height: 72px;
+  width: 100%;
+  right: 0;
+  left: 0;
+  position: absolute;
+  padding: 15px 0;
+  min-height: 72px;
 }
-.nav-expanded{
+.nav-expanded {
   background: #232323 !important;
-	  width: 100%;
-    right: 0;
-    left: 0;
-    z-index: 999;
-    position: fixed;
-    padding: 15px 0;
-    min-height: 72px;
-}
-.nav-scroll{
-    left: 0;
-    padding: 15px 0px;
-    position: fixed;
-    top: -100px;
-    width: 100%;
-    z-index: 100;
-}
-.navbar-light .navbar-nav .nav-link{
-	letter-spacing:1px;
-	text-transform: uppercase;
-	line-height: 32px;
-}
-
-.navbar .navbar-nav .nav-item{
-	padding:0px 15px;
+  width: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  position: fixed;
+  padding: 15px 0;
+  min-height: 72px;
 }
 .nav-scroll {
-    left: 0;
-    padding: 15px 0px;
-    position: fixed;
-    top: -100px;
-    width: 100%;
-    z-index: 999;
+  left: 0;
+  padding: 15px 0px;
+  position: fixed;
+  top: -100px;
+  width: 100%;
+  z-index: 100;
 }
-.navbar-nav .nav-item .nav-link{
-	position: relative;
-	padding: 0;
+.navbar-light .navbar-nav .nav-link {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 32px;
 }
-.navbar-nav .nav-item .nav-link:before{
-    position: absolute;
-    content: "";
-    width: 100%;
-    display: table;
-    height: 2px;
-    left: 0px;
-    bottom: 0px;
-    opacity: 0;
+
+.navbar .navbar-nav .nav-item {
+  padding: 0px 15px;
 }
-.navbar-nav .nav-item .nav-link.active:before{
-    opacity: 1;
+.nav-scroll {
+  left: 0;
+  padding: 15px 0px;
+  position: fixed;
+  top: -100px;
+  width: 100%;
+  z-index: 999;
+}
+.navbar-nav .nav-item .nav-link {
+  position: relative;
+  padding: 0;
+}
+.navbar-nav .nav-item .nav-link:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  display: table;
+  height: 2px;
+  left: 0px;
+  bottom: 0px;
+  opacity: 0;
+}
+.navbar-nav .nav-item .nav-link.active:before {
+  opacity: 1;
 }
 /*====================================================================
 08.   Main banner
 ======================================================================*/
-#main_banner{
-    width: 100%;
-    height: 100vh;
-    /* background-size: cover; */
-    overflow: hidden;
-    background-position: 80% 50%;
-    background-repeat: no-repeat;
-    /* position: relative; */
-    
-    /* -webkit-transition: background-image 1s ease-in-out;
-    -moz-transition: background-image 1s ease-in-out;
-    -o-transition: background-image 1s ease-in-out;
-    transition: background-image 1s ease-in-out; */
-    background-image: url(../images/fancybox/fancybox_loading.gif);
+#main_banner {
+  width: 100%;
+  height: 100vh;
+  /* background-size: cover; */
+  overflow: hidden;
+  background-position: 80% 50%;
+  background-repeat: no-repeat;
+  /* position: relative; */
+
+  -webkit-transition: background-image 1s ease-in-out;
+  -moz-transition: background-image 1s ease-in-out;
+  -o-transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out;
+  background-image: url(../images/fancybox/fancybox_loading.gif);
 }
-.mainbanner_content{
+.mainbanner_content {
   position: relative;
-  z-index: 11
+  z-index: 11;
 }
-.banner_title{
+.banner_title {
   font-size: 30px;
 }
-.mainbanner_content p{
-	font-size: 15px;
-	letter-spacing: 1px;
+.mainbanner_content p {
+  font-size: 15px;
+  letter-spacing: 1px;
   width: 50%;
 }
 
@@ -379,8 +395,8 @@ header{
 09.		About
 =================================================================================*/
 
-.personal_info ul li{
-	border-bottom: 1px solid;
+.personal_info ul li {
+  border-bottom: 1px solid;
   padding: 10px 0px;
   font-weight: bold;
 }
@@ -389,35 +405,35 @@ header{
 10.		Video Popup 
 =================================================================================*/
 .intro-video {
- width:100%;
- height: 350px;
- background-size: cover;
- position: relative
+  width: 100%;
+  height: 350px;
+  background-size: cover;
+  position: relative;
 }
 .intro-video:before {
- position: absolute;
- content: "";
- width: 100%;
- height: 100%;
- top: 0;
- left: 0;
- z-index: 1
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
-.video-popup span{
- position: absolute;
- width: 80px;
- height: 80px;
- line-height: 80px;
- text-align: center;
- font-size: 24px;
- border-radius: 50%;
- padding-left: 3px;
- top: 50%;
- left: 50%;
- z-index: 2
+.video-popup span {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  font-size: 24px;
+  border-radius: 50%;
+  padding-left: 3px;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
 }
-.video-popup .inner_title.center_middle{
- margin-top: 80px
+.video-popup .inner_title.center_middle {
+  margin-top: 80px;
 }
 .YouTubePopUp-Wrap {
   background-color: rgba(0, 0, 0, 0.8);
@@ -426,15 +442,16 @@ header{
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 99999
+  z-index: 99999;
 }
 .YouTubePopUp-Content {
-  background: rgba(0, 0, 0, 0) url("../images/fancybox/fancybox_loading.gif") no-repeat scroll center center;
+  background: rgba(0, 0, 0, 0) url("../images/fancybox/fancybox_loading.gif")
+    no-repeat scroll center center;
   display: block;
   height: 100%;
   margin: 0 auto;
   max-width: 680px;
-  position: relative
+  position: relative;
 }
 .YouTubePopUp-Content iframe {
   border: medium none;
@@ -445,75 +462,75 @@ header{
   max-width: 100%;
   position: absolute;
   top: 0;
-  width: 100%
+  width: 100%;
 }
-.profile_img.personal_video{
-    position: relative;
+.profile_img.personal_video {
+  position: relative;
 }
 .profile_img.personal_video a {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    line-height: 90px;
-    text-align: center;
-    border-radius: 50%;
-    top: 48%;
-    left: 78px;
-    z-index: 222;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  line-height: 90px;
+  text-align: center;
+  border-radius: 50%;
+  top: 48%;
+  left: 78px;
+  z-index: 222;
 }
-.profile_img.personal_video .iconround:before{
-    content: "";
-    position: absolute;
-    top: 48%;
-    left: 17px;
-    width: 122px;
-    height: 122px;
-    border: 5px solid;
-    border-radius: 100%;
+.profile_img.personal_video .iconround:before {
+  content: "";
+  position: absolute;
+  top: 48%;
+  left: 17px;
+  width: 122px;
+  height: 122px;
+  border: 5px solid;
+  border-radius: 100%;
 }
-.profile_img.personal_video .loader{
-    position: absolute;
-    left: 17.50%;
-    top: 48%;
-    z-index: 11;
-}
-.personal_video a {
-    position: relative;
+.profile_img.personal_video .loader {
+  position: absolute;
+  left: 17.5%;
+  top: 48%;
+  z-index: 11;
 }
 .personal_video a {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    line-height: 90px;
-    text-align: center;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    z-index: 222;
+  position: relative;
+}
+.personal_video a {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  line-height: 90px;
+  text-align: center;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  z-index: 222;
 }
 .personal_video .video-popup i:before {
-    font-size: 24px;
-    text-align: center;
-    margin: 0 auto;
-    margin-left: 8px;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 auto;
+  margin-left: 8px;
 }
 
 /*===============================================================================
 11.		My Skill 
 =================================================================================*/
 /* progress-bar */
-.prgs-bar{
-	position: relative;
+.prgs-bar {
+  position: relative;
 }
-.prgs-bar > span{
+.prgs-bar > span {
   color: #e1e1e1;
   font-weight: 600;
-  text-transform: uppercase
+  text-transform: uppercase;
 }
-.skill-progress .progress{
+.skill-progress .progress {
   margin: 5px 0 20px;
 }
-.skill-percent{
+.skill-percent {
   color: #e1e1e1;
   position: absolute;
   right: 0;
@@ -522,171 +539,170 @@ header{
   font-weight: 700;
   font-size: 15px;
 }
-.progress-bar{
+.progress-bar {
   transition: all 3000ms ease 0s;
-  width: 0
+  width: 0;
 }
 /* Fact Counter */
 
-.fact-counter{
-	position: relative;
-	z-index: 11
+.fact-counter {
+  position: relative;
+  z-index: 11;
 }
-.counter span:before{
-	font-size: 44px;
-	margin-left: 0;
+.counter span:before {
+  font-size: 44px;
+  margin-left: 0;
 }
-.count-num{
-	float: left;
-	display: contents;
+.count-num {
+  float: left;
+  display: contents;
 }
-.counting_digit span{
-	font-size: 30px;
-	margin-left: 5px;
+.counting_digit span {
+  font-size: 30px;
+  margin-left: 5px;
 }
-.counter h3{
-	font-weight: 600;
-	letter-spacing: 3px;
-
+.counter h3 {
+  font-weight: 600;
+  letter-spacing: 3px;
 }
 /*==================================================================================
 12.   Services Two
 ====================================================================================*/
-.service_two p{
+.service_two p {
   padding: 30px 20px;
 }
-.srv_item_number{
-    position: relative;
-    overflow: hidden;
-    text-align: right;
-    border-bottom: 1px dotted;
+.srv_item_number {
+  position: relative;
+  overflow: hidden;
+  text-align: right;
+  border-bottom: 1px dotted;
 }
-.srv_item_number:after{
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: block;
-    width: 80px;
+.srv_item_number:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 80px;
 }
-.srv_item_number strong{
-    font-size: 42px;
-    line-height: 42px;
-    font-weight: 700;
-    position: relative;
-    top: 20px;
-    display: inline-block;
-    transition: all .4s ease;
-    padding-right: 20px;
+.srv_item_number strong {
+  font-size: 42px;
+  line-height: 42px;
+  font-weight: 700;
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  transition: all 0.4s ease;
+  padding-right: 20px;
 }
-.service_two .srv_icon{
-    width: 100px;
-    height: 100px;
-    transition: all .8s ease;
-    text-align: center;
-    margin: 0 auto
+.service_two .srv_icon {
+  width: 100px;
+  height: 100px;
+  transition: all 0.8s ease;
+  text-align: center;
+  margin: 0 auto;
 }
-.service_two .srv_icon span:before{
-    font-size: 42px;
-    line-height: 100px;
+.service_two .srv_icon span:before {
+  font-size: 42px;
+  line-height: 100px;
 }
-.service_two:hover .srv_item_number strong{
-    top: 0;
+.service_two:hover .srv_item_number strong {
+  top: 0;
 }
-.service_two:hover .srv_icon{
-    transform: rotateY(180deg);
+.service_two:hover .srv_icon {
+  transform: rotateY(180deg);
 }
 
 /*===============================================================================
 13.		Portfolio
 =================================================================================*/
 
-.filters ul li{
-	float: left;
-	margin: 0px 15px;
-	cursor: pointer;
-	font-family: 'Poppins', sans-serif;
-	font-size: 16px;
-	text-transform: uppercase;
+.filters ul li {
+  float: left;
+  margin: 0px 15px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
   letter-spacing: 1px;
   color: #fff;
 }
-.default-portfolio-item{
+.default-portfolio-item {
   position: relative;
 }
-.default-portfolio-item .overlay-box{
-	position:absolute;
-	left:0px;
-	top:0px;
-	width:100%;
-	height:100%;
-	display:block;
-	opacity:0;
-	visibility:hidden;
+.default-portfolio-item .overlay-box {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
 }
-.default-portfolio-item .overlay-box span{
-	position:absolute;
-	left:0px;
-	top:47%;
-	width:100%;
-	height:100%;
-	display:table;
-	vertical-align:middle;
-	text-align:center;
+.default-portfolio-item .overlay-box span {
+  position: absolute;
+  left: 0px;
+  top: 47%;
+  width: 100%;
+  height: 100%;
+  display: table;
+  vertical-align: middle;
+  text-align: center;
 }
-.default-portfolio-item .overlay-box span i.fa{
-    text-align: center;
-    font-size: 24px;
+.default-portfolio-item .overlay-box span i.fa {
+  text-align: center;
+  font-size: 24px;
 }
-.filter-list .mix{
-	display:none;	
+.filter-list .mix {
+  display: none;
 }
-.gallery-section .filters{
-	position:relative;
-	text-align:center;
-	margin-bottom:50px;	
-}
-
-.gallery-section .filter-btns{
-	position:relative;
-	text-align:center;
+.gallery-section .filters {
+  position: relative;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.gallery-section .filter-btns li{
-	position:relative;
-	display:inline-block;
-	padding:5px 20px;
-	line-height:24px;
-	border:1px solid;
-	cursor:pointer;
-	text-transform:uppercase;
-	font-size:14px;
-	margin-right:15px;
+.gallery-section .filter-btns {
+  position: relative;
+  text-align: center;
 }
-.tag{
-	position:absolute;
-	left:15px;
-	bottom:5%;
-	vertical-align:middle;
-	text-align:center;
+
+.gallery-section .filter-btns li {
+  position: relative;
+  display: inline-block;
+  padding: 5px 20px;
+  line-height: 24px;
+  border: 1px solid;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-right: 15px;
 }
-.tag ul li{
-	float: left;
-	padding-right: 5px;
+.tag {
+  position: absolute;
+  left: 15px;
+  bottom: 5%;
+  vertical-align: middle;
+  text-align: center;
 }
-.overlay-box{
-	border:5px solid
+.tag ul li {
+  float: left;
+  padding-right: 5px;
+}
+.overlay-box {
+  border: 5px solid;
 }
 
 /*============================================================================
 14.		Testimonial
 ==============================================================================*/
 
-.member_feedback{
+.member_feedback {
   position: relative;
   margin: 60px 15px 10px 15px;
 }
-.client_img img{
+.client_img img {
   width: 100px !important;
   height: auto;
   border-radius: 100%;
@@ -695,17 +711,17 @@ header{
   left: 30px;
   margin-bottom: 20px;
 }
-.star{
+.star {
   margin-top: 40px;
 }
-.member_feedback h5{
-  font-weight: 500
+.member_feedback h5 {
+  font-weight: 500;
 }
-.star ul li{
+.star ul li {
   float: left;
   margin-right: 5px;
 }
-.member_feedback:after{
+.member_feedback:after {
   content: "";
   display: block;
   position: absolute;
@@ -720,77 +736,77 @@ header{
   overflow: hidden;
 }
 .owl-nav {
-    margin-top: 50px !important;
-    text-align: center;
-    margin: 0 auto;
+  margin-top: 50px !important;
+  text-align: center;
+  margin: 0 auto;
 }
 .owl-carousel .owl-nav button.owl-prev,
-.owl-carousel .owl-nav button.owl-next{
-	width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border: 5px solid;
+.owl-carousel .owl-nav button.owl-next {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 5px solid;
 }
 .owl-carousel .owl-nav button.owl-prev span,
-.owl-carousel .owl-nav button.owl-next span{
-	font-size: 20px;
-    line-height: 40px;
-    font-weight: 600;
+.owl-carousel .owl-nav button.owl-next span {
+  font-size: 20px;
+  line-height: 40px;
+  font-weight: 600;
 }
 .owl-carousel .owl-nav button.owl-prev {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 /*===============================================================================
 15.   Blog
 =================================================================================*/
-.blog_img{
+.blog_img {
   position: relative;
 }
-.comments{
-    position: absolute;
-    top: 10px;
-    right: 30px;
-    z-index: 1;
-    font-size: 42px;
+.comments {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  z-index: 1;
+  font-size: 42px;
 }
-.comments span{
-    position: absolute;
-    top: 7px;
-    right: 12px;
-    z-index: 11;
-    font-size: 14px;
-    font-weight: 600;
+.comments span {
+  position: absolute;
+  top: 7px;
+  right: 12px;
+  z-index: 11;
+  font-size: 14px;
+  font-weight: 600;
 }
-.blog_content{
+.blog_content {
   padding: 30px 15px;
   display: inline-block;
 }
-.blog_title a h5{
+.blog_title a h5 {
   line-height: 24px;
 }
-.blog_img{
-    overflow: hidden;
+.blog_img {
+  overflow: hidden;
 }
-.admin{
+.admin {
   background-color: #343436;
   border-radius: 30px;
   padding: 5px;
   display: inline-block;
   float: left;
 }
-.admin img{
+.admin img {
   width: 40px !important;
   height: 40px;
   border-radius: 100%;
   margin-right: 10px;
   float: left;
 }
-.admin span{
+.admin span {
   padding-right: 15px;
   line-height: 39px;
 }
-.date{
+.date {
   font-size: 16px;
   font-weight: 700;
   line-height: 50px;
@@ -799,14 +815,14 @@ header{
 /*===============================================================================
 16.   Contact
 =================================================================================*/
-.contact_info ul li{
+.contact_info ul li {
   margin-bottom: 10px;
 }
-.contact_text h6{
+.contact_text h6 {
   font-weight: 600;
   letter-spacing: 1px;
 }
-.form-control{
+.form-control {
   padding: 5px 15px;
   font-size: 14px;
   height: calc(30px + 15px);
@@ -815,9 +831,9 @@ header{
   border: none;
   border-bottom: 1px solid;
 }
-.form-control:focus{
-    outline: 0;
-    box-shadow: none;
+.form-control:focus {
+  outline: 0;
+  box-shadow: none;
 }
 .error-handel {
   bottom: -30px;
@@ -827,24 +843,25 @@ header{
   margin: auto 0;
   position: absolute;
   text-align: left;
-  width: 100%
+  width: 100%;
 }
-#success, #error {
+#success,
+#error {
   display: none;
-  line-height: 34px
+  line-height: 34px;
 }
-.contact_message .error{
+.contact_message .error {
   font-weight: 500;
   font-size: 13px;
   margin-bottom: 0;
 }
 
 .blog_item {
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .github_container i {
-  color: #29B6F6;
+  color: #29b6f6;
   vertical-align: middle;
   font-size: 50px;
   padding: 10px 30px;
@@ -856,7 +873,7 @@ header{
   color: #232323;
 }
 .linkedin-home i {
-  color: #29B6F6;
+  color: #29b6f6;
   vertical-align: middle;
   font-size: 50px;
 }
@@ -883,7 +900,7 @@ header{
 =================================================================================*/
 
 .pokemon-button {
-  position: fixed; 
+  position: fixed;
   bottom: 5vw;
   right: 5vw;
   border-radius: 50%;
@@ -895,7 +912,7 @@ header{
 }
 
 .pokemon-button:hover {
-  background-color: #29B6F6;
+  background-color: #29b6f6;
   height: 20vh;
   width: 20vh;
 }
