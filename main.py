@@ -56,6 +56,11 @@ def hw():
     return app.send_static_file("cloudApp.html")
 
 
+@app.route("/liebling")
+def liebling():
+    return app.send_static_file("liebling/index.html")
+
+
 @app.route("/")
 def home():
     return app.send_static_file("index.html")
