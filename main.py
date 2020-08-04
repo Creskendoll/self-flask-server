@@ -120,6 +120,15 @@ def postImg():
     redirect_url = PROXY_URL + "/pokemoned/post-image"
     return proxy(redirect_url)
 
+@app.route("/kolors", methods=["GET"], defaults={'path': None})
+@app.route("/kolors/<path:path>", methods=["POST", "GET"])
+@cross_origin(headers=["Content-Type"])
+def kolors(path):
+    PI_IP = "http://85.101.216.190"
+    redirect_url = request.url.replace(request.host_url + "kolors", PI_IP)
+
+    return proxy(redirect_url)
+
 
 @app.route("/send-mail", methods=["POST"])
 @cross_origin(headers=["Content-Type"])
