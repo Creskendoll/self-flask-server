@@ -1,8 +1,3 @@
-Fabric
-Flask-SQLAlchemy
-Flask-WTF
-WTForms
-coverage
 numpy
 Pillow
 opencv-python

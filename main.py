@@ -2,7 +2,7 @@
 # Imports
 # ----------------------------------------------------------------------------#
 
-from flask import Flask, request, Response
+from flask import Flask, request, Response, redirect
 import logging
 from logging import Formatter, FileHandler
 import os
@@ -120,14 +120,26 @@ def postImg():
     redirect_url = PROXY_URL + "/pokemoned/post-image"
     return proxy(redirect_url)
 
-@app.route("/kolors", methods=["GET"], defaults={'path': None})
+
+@app.route("/kolors", methods=["GET"], defaults={"path": None})
 @app.route("/kolors/<path:path>", methods=["POST", "GET"])
 @cross_origin(headers=["Content-Type"])
 def kolors(path):
-    PI_IP = "http://85.101.216.190"
-    redirect_url = request.url.replace(request.host_url + "kolors", PI_IP)
+    try:
+        # PI_IP = "http://kenpi.free-domain.net"
+        # https://my.freenom.com
+        # PI_IP = "http://kenpi.tk"
+        PI_IP = "http://85.101.221.86"
+        redirect_url = request.url.replace(request.host_url + "kolors", PI_IP)
 
-    return proxy(redirect_url)
+        return proxy(redirect_url)
+    except:
+        return app.send_static_file("404.html"), 404
+
+
+@app.route("/love")
+def love():
+    return app.send_static_file("love/index.html")
 
 
 @app.route("/send-mail", methods=["POST"])
